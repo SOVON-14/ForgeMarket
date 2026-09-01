@@ -1,0 +1,433 @@
+/* ForgeMarket - Artisan Profile Page Styles */
+
+.artisan-profile-page {
+    padding: 2rem 0;
+    background-color: var(--background-color);
+    min-height: calc(100vh - 200px);
+}
+
+.back-nav {
+    margin-bottom: 2rem;
+}
+
+/* Profile Header */
+.profile-header {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+}
+
+.profile-image-section {
+    position: relative;
+}
+
+.profile-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    background-color: var(--neutral-color);
+}
+
+.profile-badges {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile-info-section h1 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.specialty {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.location::before {
+    content: '📍';
+}
+
+/* Rating */
+.profile-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.rating-stars {
+    color: #FFD700;
+    font-size: 1.5rem;
+}
+
+.rating-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.review-count {
+    color: var(--text-light);
+}
+
+/* Stats */
+.profile-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Availability */
+.profile-availability {
+    margin-bottom: 1.5rem;
+}
+
+.availability-status {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.availability-status.available {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.availability-status.busy {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* Actions */
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.profile-actions .btn {
+    flex: 1;
+}
+
+/* Tabs */
+.profile-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-button {
+    padding: 12px 24px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.tab-button:hover {
+    color: var(--primary-color);
+}
+
+.tab-button.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* Tab Content */
+.tab-content {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* About Section */
+.about-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.about-section > p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.skills-section,
+.services-section,
+.verification-section {
+    margin-bottom: 2rem;
+}
+
+.skills-section h3,
+.services-section h3,
+.verification-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    background-color: var(--background-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.service-item {
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.service-item::before {
+    content: '✓';
+    color: var(--success);
+    font-weight: bold;
+}
+
+.verification-info {
+    background-color: #d4edda;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--success);
+}
+
+.verification-info p {
+    margin: 0.5rem 0;
+}
+
+.verification-info strong {
+    color: var(--success);
+}
+
+/* Portfolio Section */
+.portfolio-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.portfolio-item {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: var(--neutral-color);
+}
+
+.portfolio-info {
+    padding: 1rem;
+}
+
+.portfolio-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.portfolio-description {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.portfolio-date {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* Reviews Section */
+.reviews-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.review-item {
+    background-color: var(--background-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+}
+
+.review-author {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.review-rating {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
+
+.review-text {
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.review-verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--success);
+    margin-top: 0.5rem;
+}
+
+.review-verified::before {
+    content: '✓';
+}
+
+/* Empty States */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-light);
+}
+
+.empty-state h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-header {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-image {
+        height: 250px;
+    }
+
+    .profile-stats {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .stat-item {
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+
+    .profile-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .tab-button {
+        padding: 12px 16px;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-list {
+        grid-template-columns: 1fr;
+    }
+}

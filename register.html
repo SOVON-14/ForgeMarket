@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="about.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth">
+                        <a href="login.html" class="btn btn-outline">Connexion</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="auth-page">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <div class="auth-header">
+                            <h2>Créer un compte</h2>
+                            <p>Rejoignez ForgeMarket en quelques minutes</p>
+                        </div>
+
+                        <form id="registerForm" class="auth-form" data-ajax="true" action="/api/v1/auth/register" method="POST" data-redirect="login.html">
+                            <div class="form-group">
+                                <label class="form-label">Je suis un :</label>
+                                <div class="role-selection">
+                                    <label class="role-card">
+                                        <input type="radio" name="role" value="client" required>
+                                        <h4>Client</h4>
+                                        <p>Je cherche des artisans pour mes projets</p>
+                                    </label>
+                                    <label class="role-card">
+                                        <input type="radio" name="role" value="artisan" required>
+                                        <h4>Artisan</h4>
+                                        <p>Je propose mes services de forge/soudure</p>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="firstName" class="form-label">Prénom</label>
+                                <input type="text" id="firstName" name="firstName" class="form-input" required placeholder="Votre prénom">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName" class="form-label">Nom</label>
+                                <input type="text" id="lastName" name="lastName" class="form-input" required placeholder="Votre nom">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-input" required placeholder="votre@email.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Téléphone</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" required placeholder="+228 XX XX XX XX">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" id="password" name="password" class="form-input" required placeholder="••••••••" minlength="8">
+                                <div class="password-strength">
+                                    <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                                </div>
+                                <div class="password-strength-text" id="passwordStrengthText"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required placeholder="••••••••">
+                            </div>
+
+                            <div class="form-group form-checkbox">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">J'accepte les <a href="cgu.html" target="_blank">Conditions Générales d'Utilisation</a> et la <a href="privacy.html" target="_blank">Politique de Confidentialité</a></label>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Créer mon compte</button>
+                            </div>
+                        </form>
+
+                        <div class="auth-divider">
+                            <span>ou</span>
+                        </div>
+
+                        <div class="auth-social">
+                            <p>Vous avez déjà un compte ?</p>
+                            <a href="login.html" class="btn btn-outline btn-large" style="width: 100%;">Se connecter</a>
+                        </div>
+                    </div>
+
+                    <div class="auth-info">
+                        <h3>Avantages de l'inscription</h3>
+                        <p>En vous inscrivant sur ForgeMarket, vous bénéficiez de:</p>
+                        <ul>
+                            <li>✓ Accès aux artisans vérifiés et certifiés</li>
+                            <li>✓ Système de suivi de commande en temps réel</li>
+                            <li>✓ Évaluations et Score ForgeMarket transparent</li>
+                            <li>✓ Protection contre les litiges</li>
+                            <li>✓ Notifications en temps réel</li>
+                            <li>✓ Programme de fidélité exclusif</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

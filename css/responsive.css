@@ -1,0 +1,254 @@
+/* ForgeMarket - Responsive Styles */
+
+/* Mobile First Approach */
+
+/* Extra Small Devices (phones, 576px and down) */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Navigation */
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: var(--white);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: var(--shadow);
+        padding: 2rem 0;
+        gap: 1rem;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-auth {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    /* Hero */
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .search-select {
+        min-width: 100%;
+    }
+
+    /* Features */
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Steps */
+    .steps {
+        flex-direction: column;
+    }
+
+    /* Stats */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Grid layouts */
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Cards */
+    .card {
+        padding: 1rem;
+    }
+
+    /* Forms */
+    .form-input,
+    .form-select,
+    .form-textarea {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+
+    /* Buttons */
+    .btn-large {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+}
+
+/* Small Devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 768px) {
+    /* Navigation */
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: var(--white);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: var(--shadow);
+        padding: 2rem 0;
+        gap: 1rem;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    /* Hero */
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    /* Features */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Stats */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Grid layouts */
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Medium Devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 992px) {
+    /* Navigation */
+    .nav-menu {
+        gap: 1.5rem;
+    }
+
+    /* Hero */
+    .hero-content h2 {
+        font-size: 2.2rem;
+    }
+
+    /* Features */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Stats */
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Grid layouts */
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large Devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1200px) {
+    /* Features */
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Extra Large Devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    /* All default styles apply */
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .footer,
+    .btn,
+    .hero-search {
+        display: none;
+    }
+
+    body {
+        background-color: white;
+        color: black;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* Dark Mode Support (future enhancement) */
+@media (prefers-color-scheme: dark) {
+    /* Currently not implemented as per specification */
+    /* Can be added in future versions */
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .btn-primary,
+    .btn-secondary {
+        border: 2px solid currentColor;
+    }
+
+    .card {
+        border: 2px solid var(--text-color);
+    }
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demander un Devis - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/quote.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="dashboard.html">Tableau de bord</a></li>
+                    <li><a href="orders.html">Commandes</a></li>
+                    <li class="nav-auth">
+                        <a href="dashboard.html" class="btn btn-outline">Mon compte</a>
+                        <button onclick="logout()" class="btn btn-primary">Déconnexion</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="quote-page">
+            <div class="container">
+                <!-- Access Denied Message -->
+                <div id="accessDenied" class="access-denied hidden">
+                    <div class="access-denied-card">
+                        <h2>⚠ Accès limité</h2>
+                        <p>La fonctionnalité de demande de devis détaillée est disponible après avoir complété 5 commandes finalisées.</p>
+                        <div class="progress-info">
+                            <p>Votre progression : <span id="currentProgress">0</span>/5 commandes</p>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="access-denied-actions">
+                            <a href="artisans.html" class="btn btn-primary">Découvrir les artisans</a>
+                            <a href="orders.html" class="btn btn-outline">Voir mes commandes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quote Form -->
+                <div id="quoteFormContainer" class="quote-form-container hidden">
+                    <div class="page-header">
+                        <h1>Demander un Devis</h1>
+                        <p>Décrivez votre projet et recevez des propositions d'artisans qualifiés</p>
+                    </div>
+
+                    <div class="quote-type-selection">
+                        <h2>Type de demande</h2>
+                        <div class="type-cards">
+                            <label class="type-card">
+                                <input type="radio" name="quoteType" value="direct" checked>
+                                <div class="type-card-content">
+                                    <h3><i class="fas fa-bullseye"></i> Demande directe</h3>
+                                    <p>Envoyez votre demande à un artisan spécifique</p>
+                                </div>
+                            </label>
+                            <label class="type-card">
+                                <input type="radio" name="quoteType" value="tender">
+                                <div class="type-card-content">
+                                    <h3><i class="fas fa-bullhorn"></i> Appel d'offres</h3>
+                                    <p>Recevez des propositions de plusieurs artisans</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <form id="quoteForm" class="quote-form">
+                        <!-- Direct Request Section -->
+                        <div id="directRequestSection" class="form-section">
+                            <h3>Sélection de l'artisan</h3>
+                            <div class="form-group">
+                                <label for="artisanSelect" class="form-label">Choisir un artisan</label>
+                                <select id="artisanSelect" class="form-select" required>
+                                    <option value="">Sélectionnez un artisan</option>
+                                    <!-- Artisans will be loaded dynamically -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Tender Request Section -->
+                        <div id="tenderRequestSection" class="form-section hidden">
+                            <h3>Détails de l'appel d'offres</h3>
+                            <div class="form-group">
+                                <label for="category" class="form-label">Catégorie</label>
+                                <select id="category" class="form-select">
+                                    <option value="">Sélectionnez une catégorie</option>
+                                    <option value="ferronnerie">Ferronnerie</option>
+                                    <option value="soudure">Soudure</option>
+                                    <option value="construction_metallique">Construction métallique</option>
+                                    <option value="menuiserie_metal">Menuiserie métallique</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="location" class="form-label">Localisation du projet</label>
+                                <select id="location" class="form-select">
+                                    <option value="">Sélectionnez une ville</option>
+                                    <option value="lome">Lomé</option>
+                                    <option value="sokode">Sokodé</option>
+                                    <option value="kara">Kara</option>
+                                    <option value="atsapie">Atsapié</option>
+                                    <option value="tsevie">Tsévié</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget" class="form-label">Budget estimatif (FCFA)</label>
+                                <input type="number" id="budget" class="form-input" placeholder="Ex: 100000">
+                            </div>
+                        </div>
+
+                        <!-- Common Fields -->
+                        <div class="form-section">
+                            <h3>Description du projet</h3>
+                            <div class="form-group">
+                                <label for="title" class="form-label">Titre du projet</label>
+                                <input type="text" id="title" class="form-input" required placeholder="Ex: Portail en fer forgé">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description" class="form-label">Description détaillée</label>
+                                <textarea id="description" class="form-textarea" required placeholder="Décrivez votre projet en détail : dimensions, matériaux, finition souhaitée, etc."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="deadline" class="form-label">Date limite souhaitée</label>
+                                <input type="date" id="deadline" class="form-input">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address" class="form-label">Adresse du projet</label>
+                                <input type="text" id="address" class="form-input" required placeholder="Adresse complète">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="files" class="form-label">Documents (plans, photos, etc.)</label>
+                                <input type="file" id="files" class="form-input" multiple accept="image/*,.pdf,.doc,.docx">
+                                <small>Formats acceptés: JPG, PNG, PDF, DOC (max 10MB par fichier)</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="voiceNote" class="form-label">Message vocal (optionnel)</label>
+                                <div class="voice-recorder">
+                                    <button type="button" id="recordButton" class="btn btn-outline">🎤 Enregistrer</button>
+                                    <button type="button" id="stopButton" class="btn btn-outline hidden">⏹ Arrêter</button>
+                                    <span id="recordingStatus"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <div class="form-group form-checkbox">
+                                <input type="checkbox" id="terms" required>
+                                <label for="terms">J'accepte les conditions de la demande de devis et comprends que les informations seront partagées avec les artisans concernés</label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-large">Envoyer la demande</button>
+                            <button type="button" class="btn btn-outline btn-large" onclick="window.location.href='dashboard.html'">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/quote.js"></script>
+</body>
+</html>

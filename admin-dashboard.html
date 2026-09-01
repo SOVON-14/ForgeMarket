@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar admin-nav">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket <span class="admin-badge">Admin</span></h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="admin-dashboard.html" class="active">Tableau de bord</a></li>
+                    <li><a href="admin-users.html">Utilisateurs</a></li>
+                    <li><a href="admin-artisans.html">Artisans</a></li>
+                    <li><a href="admin-orders.html">Commandes</a></li>
+                    <li><a href="admin-disputes.html">Litiges</a></li>
+                    <li class="nav-auth">
+                        <button onclick="logout()" class="btn btn-primary">Déconnexion</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-dashboard">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Tableau de bord Administration</h1>
+                    <p>Vue d'ensemble de la plateforme ForgeMarket</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon users"><i class="fas fa-users"></i></div>
+                        <div class="stat-info">
+                            <h3>Utilisateurs</h3>
+                            <p class="stat-number" id="totalUsers">0</p>
+                            <p class="stat-change positive">+12% ce mois</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon artisans"><i class="fas fa-hard-hat"></i></div>
+                        <div class="stat-info">
+                            <h3>Artisans</h3>
+                            <p class="stat-number" id="totalArtisans">0</p>
+                            <p class="stat-change positive">+8% ce mois</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orders"><i class="fas fa-box"></i></div>
+                        <div class="stat-info">
+                            <h3>Commandes</h3>
+                            <p class="stat-number" id="totalOrders">0</p>
+                            <p class="stat-change positive">+15% ce mois</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon revenue"><i class="fas fa-coins"></i></div>
+                        <div class="stat-info">
+                            <h3>Revenus</h3>
+                            <p class="stat-number" id="totalRevenue">0 FCFA</p>
+                            <p class="stat-change positive">+20% ce mois</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <!-- Pending Artisans -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2>Artisans en attente de validation</h2>
+                            <a href="admin-artisans.html" class="btn btn-outline btn-small">Voir tout</a>
+                        </div>
+                        <div class="card-body">
+                            <div id="pendingArtisans" class="pending-list">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Orders -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2>Commandes récentes</h2>
+                            <a href="admin-orders.html" class="btn btn-outline btn-small">Voir tout</a>
+                        </div>
+                        <div class="card-body">
+                            <div id="recentOrders" class="recent-list">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Disputes -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2>Litiges en cours</h2>
+                            <a href="admin-disputes.html" class="btn btn-outline btn-small">Voir tout</a>
+                        </div>
+                        <div class="card-body">
+                            <div id="activeDisputes" class="disputes-list">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Platform Activity -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2>Activité de la plateforme</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-chart">
+                                <div class="chart-placeholder">
+                                    <p>Graphique d'activité (7 derniers jours)</p>
+                                    <div class="chart-bars">
+                                        <div class="chart-bar" style="height: 60%"></div>
+                                        <div class="chart-bar" style="height: 80%"></div>
+                                        <div class="chart-bar" style="height: 45%"></div>
+                                        <div class="chart-bar" style="height: 90%"></div>
+                                        <div class="chart-bar" style="height: 70%"></div>
+                                        <div class="chart-bar" style="height: 55%"></div>
+                                        <div class="chart-bar" style="height: 85%"></div>
+                                    </div>
+                                    <div class="chart-labels">
+                                        <span>Lun</span>
+                                        <span>Mar</span>
+                                        <span>Mer</span>
+                                        <span>Jeu</span>
+                                        <span>Ven</span>
+                                        <span>Sam</span>
+                                        <span>Dim</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alerts -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2>Alertes système</h2>
+                        </div>
+                        <div class="card-body">
+                            <div id="systemAlerts" class="alerts-list">
+                                <div class="alert-item warning">
+                                    <span class="alert-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                                    <div class="alert-content">
+                                        <p>3 artisans en attente de validation depuis plus de 48h</p>
+                                        <small>Il y a 2 heures</small>
+                                    </div>
+                                </div>
+                                <div class="alert-item info">
+                                    <span class="alert-icon"><i class="fas fa-info-circle"></i></span>
+                                    <div class="alert-content">
+                                        <p>Nouveaux utilisateurs inscrits aujourd'hui: 12</p>
+                                        <small>Il y a 1 heure</small>
+                                    </div>
+                                </div>
+                                <div class="alert-item success">
+                                    <span class="alert-icon"><i class="fas fa-check-circle"></i></span>
+                                    <div class="alert-content">
+                                        <p>Tous les services sont opérationnels</p>
+                                        <small>Il y a 5 minutes</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2>Actions rapides</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="quick-actions">
+                                <button class="action-btn" onclick="window.location.href='admin-artisans.html'">
+                                    <span class="action-icon"><i class="fas fa-hard-hat"></i></span>
+                                    <span>Valider artisans</span>
+                                </button>
+                                <button class="action-btn" onclick="window.location.href='admin-disputes.html'">
+                                    <span class="action-icon"><i class="fas fa-balance-scale"></i></span>
+                                    <span>Gérer litiges</span>
+                                </button>
+                                <button class="action-btn" onclick="exportReport()">
+                                    <span class="action-icon"><i class="fas fa-chart-bar"></i></span>
+                                    <span>Exporter rapport</span>
+                                </button>
+                                <button class="action-btn" onclick="viewAuditLog()">
+                                    <span class="action-icon"><i class="fas fa-clipboard-list"></i></span>
+                                    <span>Journal d'audit</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket - Administration. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

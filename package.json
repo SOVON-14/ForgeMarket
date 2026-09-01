@@ -1,0 +1,25 @@
+{
+  "name": "forgemarket-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for ForgeMarket - Platform connecting clients with blacksmiths and welders in Togo",
+  "main": "index.html",
+  "scripts": {
+    "start": "echo 'To run locally, use a simple HTTP server like: python -m http.server 8000 or npx serve'",
+    "dev": "npx serve",
+    "build": "echo 'No build process required for static HTML/CSS/JS'",
+    "test": "echo 'Tests to be implemented'"
+  },
+  "keywords": [
+    "forge",
+    "marketplace",
+    "togo",
+    "blacksmith",
+    "welding",
+    "artisans"
+  ],
+  "author": "ForgeMarket Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

@@ -1,0 +1,244 @@
+/* ForgeMarket - Authentication Page Styles */
+
+.auth-page {
+    min-height: calc(100vh - 200px);
+    padding: 3rem 0;
+    background-color: var(--background-color);
+}
+
+.auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.auth-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-header h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+    color: var(--text-light);
+    margin: 0;
+}
+
+.auth-form {
+    margin-bottom: 1.5rem;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.auth-links a {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 2rem 0;
+    color: var(--text-light);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-divider span {
+    padding: 0 1rem;
+    font-size: 0.9rem;
+}
+
+.auth-social {
+    text-align: center;
+}
+
+.auth-social p {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.auth-info {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.auth-info h3 {
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.auth-info p {
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.auth-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.auth-info li {
+    padding: 0.5rem 0;
+    opacity: 0.9;
+}
+
+.auth-info li::before {
+    content: '✓ ';
+    font-weight: bold;
+}
+
+/* Role Selection */
+.role-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.role-card {
+    border: 2px solid #eee;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.role-card:hover {
+    border-color: var(--primary-color);
+    background-color: var(--background-color);
+}
+
+.role-card.selected {
+    border-color: var(--primary-color);
+    background-color: rgba(194, 101, 42, 0.1);
+}
+
+.role-card input[type="radio"] {
+    display: none;
+}
+
+.role-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.role-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    margin-top: 0.5rem;
+    height: 4px;
+    background-color: #eee;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0;
+    transition: var(--transition);
+}
+
+.password-strength-bar.weak {
+    width: 33%;
+    background-color: var(--error);
+}
+
+.password-strength-bar.medium {
+    width: 66%;
+    background-color: var(--warning);
+}
+
+.password-strength-bar.strong {
+    width: 100%;
+    background-color: var(--success);
+}
+
+.password-strength-text {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    color: var(--text-light);
+}
+
+/* Form Validation */
+.form-input:invalid,
+.form-select:invalid {
+    border-color: var(--error);
+}
+
+.form-input:valid,
+.form-select:valid {
+    border-color: var(--success);
+}
+
+.error-message {
+    color: var(--error);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.form-group.has-error .error-message {
+    display: block;
+}
+
+.form-group.has-error .form-input,
+.form-group.has-error .form-select {
+    border-color: var(--error);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-info {
+        order: -1;
+    }
+
+    .role-selection {
+        grid-template-columns: 1fr;
+    }
+}

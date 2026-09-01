@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisans - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/artisans.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html" class="active">Artisans</a></li>
+                    <li><a href="about.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth">
+                        <a href="login.html" class="btn btn-outline">Connexion</a>
+                        <a href="register.html" class="btn btn-primary">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="artisans-page">
+            <div class="container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1>Nos Artisans Vérifiés</h1>
+                    <p>Découvrez les meilleurs forgerons et soudeurs du Togo</p>
+                </div>
+
+                <!-- Search and Filters -->
+                <div class="search-filters">
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un artisan, une spécialité...">
+                        <button class="btn btn-primary" id="searchButton">Rechercher</button>
+                    </div>
+
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="categoryFilter">Catégorie</label>
+                            <select id="categoryFilter" class="form-select">
+                                <option value="">Toutes les catégories</option>
+                                <option value="ferronnerie">Ferronnerie</option>
+                                <option value="soudure">Soudure</option>
+                                <option value="construction_metallique">Construction métallique</option>
+                                <option value="menuiserie_metal">Menuiserie métallique</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="locationFilter">Localisation</label>
+                            <select id="locationFilter" class="form-select">
+                                <option value="">Toutes les villes</option>
+                                <option value="lome">Lomé</option>
+                                <option value="sokode">Sokodé</option>
+                                <option value="kara">Kara</option>
+                                <option value="atsapie">Atsapié</option>
+                                <option value="tsévié">Tsévié</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="ratingFilter">Note minimale</label>
+                            <select id="ratingFilter" class="form-select">
+                                <option value="">Toutes les notes</option>
+                                <option value="4">4 étoiles et plus</option>
+                                <option value="3">3 étoiles et plus</option>
+                                <option value="2">2 étoiles et plus</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="availabilityFilter">Disponibilité</label>
+                            <select id="availabilityFilter" class="form-select">
+                                <option value="">Tous</option>
+                                <option value="available">Disponible</option>
+                                <option value="busy">Occupé</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Count -->
+                <div class="results-info">
+                    <p id="resultsCount">Chargement des artisans...</p>
+                    <div class="sort-options">
+                        <label for="sortSelect">Trier par:</label>
+                        <select id="sortSelect" class="form-select">
+                            <option value="rating">Note (du plus élevé)</option>
+                            <option value="orders">Nombre de commandes</option>
+                            <option value="name">Nom (A-Z)</option>
+                            <option value="recent">Plus récent</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Artisans Grid -->
+                <div class="artisans-grid" id="artisansGrid">
+                    <!-- Artisan cards will be loaded dynamically -->
+                    <div class="spinner"></div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <button class="btn btn-outline" id="prevPage" disabled>Précédent</button>
+                    <span id="pageNumbers">Page 1 sur 1</span>
+                    <button class="btn btn-outline" id="nextPage" disabled>Suivant</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/artisans.js"></script>
+</body>
+</html>

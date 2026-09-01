@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="about.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth">
+                        <a href="register.html" class="btn btn-primary">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="auth-page">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <div class="auth-header">
+                            <h2>Connexion</h2>
+                            <p>Connectez-vous à votre compte ForgeMarket</p>
+                        </div>
+
+                        <form id="loginForm" class="auth-form" data-ajax="true" action="/api/v1/auth/login" method="POST">
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-input" required placeholder="votre@email.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" id="password" name="password" class="form-input" required placeholder="••••••••">
+                            </div>
+
+                            <div class="form-group form-checkbox">
+                                <input type="checkbox" id="remember" name="remember">
+                                <label for="remember">Se souvenir de moi</label>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Se connecter</button>
+                            </div>
+
+                            <div class="auth-links">
+                                <a href="forgot-password.html">Mot de passe oublié ?</a>
+                            </div>
+                        </form>
+
+                        <div class="auth-divider">
+                            <span>ou</span>
+                        </div>
+
+                        <div class="auth-social">
+                            <p>Vous n'avez pas de compte ?</p>
+                            <a href="register.html" class="btn btn-outline btn-large" style="width: 100%;">Créer un compte</a>
+                        </div>
+                    </div>
+
+                    <div class="auth-info">
+                        <h3>Bienvenue sur ForgeMarket</h3>
+                        <p>Connectez-vous pour accéder à:</p>
+                        <ul>
+                            <li>✓ Consulter les profils des artisans vérifiés</li>
+                            <li>✓ Passer des commandes et suivre leur avancement</li>
+                            <li>✓ Accéder aux demandes de devis (après 5 commandes)</li>
+                            <li>✓ Évaluer les artisans et construire votre réputation</li>
+                            <li>✓ Gérer vos favoris et notifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

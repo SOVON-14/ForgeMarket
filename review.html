@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluer - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/review.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="dashboard.html">Tableau de bord</a></li>
+                    <li><a href="orders.html">Commandes</a></li>
+                    <li class="nav-auth">
+                        <a href="dashboard.html" class="btn btn-outline">Mon compte</a>
+                        <button onclick="logout()" class="btn btn-primary">Déconnexion</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="review-page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Évaluer la commande</h1>
+                    <p>Partagez votre expérience pour aider la communauté</p>
+                </div>
+
+                <div class="review-container">
+                    <!-- Order Info -->
+                    <div class="order-info-card">
+                        <h2>Informations de la commande</h2>
+                        <div id="orderDetails">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+
+                    <!-- Review Form -->
+                    <div class="review-form-card">
+                        <h2>Votre évaluation</h2>
+                        <form id="reviewForm">
+                            <!-- Overall Rating -->
+                            <div class="form-section">
+                                <h3>Note globale</h3>
+                                <div class="rating-input">
+                                    <div class="stars" id="overallStars">
+                                        <span class="star" data-rating="1">★</span>
+                                        <span class="star" data-rating="2">★</span>
+                                        <span class="star" data-rating="3">★</span>
+                                        <span class="star" data-rating="4">★</span>
+                                        <span class="star" data-rating="5">★</span>
+                                    </div>
+                                    <input type="hidden" id="overallRating" name="overallRating" value="0" required>
+                                    <div class="rating-label" id="ratingLabel">Sélectionnez une note</div>
+                                </div>
+                            </div>
+
+                            <!-- Detailed Ratings -->
+                            <div class="form-section">
+                                <h3>Évaluation détaillée</h3>
+                                <div class="detailed-ratings">
+                                    <div class="rating-item">
+                                        <label>Qualité du travail</label>
+                                        <div class="mini-stars" data-criteria="quality">
+                                            <span class="mini-star" data-rating="1">★</span>
+                                            <span class="mini-star" data-rating="2">★</span>
+                                            <span class="mini-star" data-rating="3">★</span>
+                                            <span class="mini-star" data-rating="4">★</span>
+                                            <span class="mini-star" data-rating="5">★</span>
+                                        </div>
+                                        <input type="hidden" name="qualityRating" value="0">
+                                    </div>
+                                    <div class="rating-item">
+                                        <label>Respect des délais</label>
+                                        <div class="mini-stars" data-criteria="timeliness">
+                                            <span class="mini-star" data-rating="1">★</span>
+                                            <span class="mini-star" data-rating="2">★</span>
+                                            <span class="mini-star" data-rating="3">★</span>
+                                            <span class="mini-star" data-rating="4">★</span>
+                                            <span class="mini-star" data-rating="5">★</span>
+                                        </div>
+                                        <input type="hidden" name="timelinessRating" value="0">
+                                    </div>
+                                    <div class="rating-item">
+                                        <label>Communication</label>
+                                        <div class="mini-stars" data-criteria="communication">
+                                            <span class="mini-star" data-rating="1">★</span>
+                                            <span class="mini-star" data-rating="2">★</span>
+                                            <span class="mini-star" data-rating="3">★</span>
+                                            <span class="mini-star" data-rating="4">★</span>
+                                            <span class="mini-star" data-rating="5">★</span>
+                                        </div>
+                                        <input type="hidden" name="communicationRating" value="0">
+                                    </div>
+                                    <div class="rating-item">
+                                        <label>Rapport qualité/prix</label>
+                                        <div class="mini-stars" data-criteria="value">
+                                            <span class="mini-star" data-rating="1">★</span>
+                                            <span class="mini-star" data-rating="2">★</span>
+                                            <span class="mini-star" data-rating="3">★</span>
+                                            <span class="mini-star" data-rating="4">★</span>
+                                            <span class="mini-star" data-rating="5">★</span>
+                                        </div>
+                                        <input type="hidden" name="valueRating" value="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comment -->
+                            <div class="form-section">
+                                <h3>Commentaire (obligatoire)</h3>
+                                <div class="form-group">
+                                    <label for="reviewComment" class="form-label">Décrivez votre expérience</label>
+                                    <textarea id="reviewComment" name="comment" class="form-textarea" required
+                                        placeholder="Partagez les points forts et les points à améliorer de votre expérience avec cet artisan..." minlength="20"></textarea>
+                                    <small class="char-count">Minimum 20 caractères</small>
+                                </div>
+                            </div>
+
+                            <!-- Pros and Cons -->
+                            <div class="form-section">
+                                <h3>Points forts et points à améliorer (optionnel)</h3>
+                                <div class="form-group">
+                                    <label for="pros" class="form-label">Points forts</label>
+                                    <textarea id="pros" name="pros" class="form-textarea"
+                                        placeholder="Ce que vous avez particulièrement apprécié..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cons" class="form-label">Points à améliorer</label>
+                                    <textarea id="cons" name="cons" class="form-textarea"
+                                        placeholder="Ce qui pourrait être amélioré..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Recommendations -->
+                            <div class="form-section">
+                                <h3>Recommandation</h3>
+                                <div class="form-group form-checkbox">
+                                    <input type="checkbox" id="recommend" name="recommend">
+                                    <label for="recommend">Je recommande cet artisan à d'autres clients</label>
+                                </div>
+                            </div>
+
+                            <!-- Submit -->
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary btn-large">Publier mon évaluation</button>
+                                <button type="button" class="btn btn-outline btn-large" onclick="window.location.href='orders.html'">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Review Guidelines -->
+                <div class="review-guidelines">
+                    <h3>Conseils pour une bonne évaluation</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Soyez honnête et objectif dans votre évaluation</li>
+                        <li><i class="fas fa-check"></i> Décrivez des faits précis et évitez les généralités</li>
+                        <li><i class="fas fa-check"></i> Mentionnez les aspects positifs et négatifs</li>
+                        <li><i class="fas fa-check"></i> Votre évaluation aidera autres clients à faire leur choix</li>
+                        <li><i class="fas fa-check"></i> Les évaluations abusives peuvent être modérées</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/review.js"></script>
+</body>
+</html>

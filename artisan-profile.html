@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Artisan - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/artisan-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="about.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth">
+                        <a href="login.html" class="btn btn-outline">Connexion</a>
+                        <a href="register.html" class="btn btn-primary">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="artisan-profile-page">
+            <div class="container">
+                <!-- Loading State -->
+                <div id="loadingState" class="spinner"></div>
+
+                <!-- Profile Content -->
+                <div id="profileContent" class="hidden">
+                    <!-- Back Button -->
+                    <div class="back-nav">
+                        <a href="artisans.html" class="btn btn-outline">← Retour aux artisans</a>
+                    </div>
+
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <div class="profile-image-section">
+                            <img id="artisanImage" src="" alt="Photo de l'artisan" class="profile-image">
+                            <div class="profile-badges">
+                                <span id="verifiedBadge" class="badge badge-success hidden">Vérifié</span>
+                                <span id="newBadge" class="badge badge-primary hidden">Nouveau</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-section">
+                            <h1 id="artisanName">Chargement...</h1>
+                            <p id="artisanSpecialty" class="specialty">Chargement...</p>
+                            <p id="artisanLocation" class="location">Chargement...</p>
+
+                            <div class="profile-rating">
+                                <div class="rating-stars" id="ratingStars">★★★★★</div>
+                                <span id="ratingValue" class="rating-value">0.0</span>
+                                <span id="reviewCount" class="review-count">(0 avis)</span>
+                            </div>
+
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <span id="ordersCount" class="stat-number">0</span>
+                                    <span class="stat-label">Commandes</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span id="experienceYears" class="stat-number">0</span>
+                                    <span class="stat-label">Années d'expérience</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span id="responseRate" class="stat-number">0%</span>
+                                    <span class="stat-label">Taux de réponse</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-availability">
+                                <span id="availabilityStatus" class="availability-status">Disponible</span>
+                            </div>
+
+                            <div class="profile-actions">
+                                <button id="contactButton" class="btn btn-primary btn-large">Contacter l'artisan</button>
+                                <button id="favoriteButton" class="btn btn-outline btn-large">☆ Ajouter aux favoris</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Tabs -->
+                    <div class="profile-tabs">
+                        <button class="tab-button active" data-tab="about">À propos</button>
+                        <button class="tab-button" data-tab="portfolio">Portfolio</button>
+                        <button class="tab-button" data-tab="reviews">Avis</button>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+                        <!-- About Tab -->
+                        <div id="aboutTab" class="tab-pane active">
+                            <div class="about-section">
+                                <h2>À propos de l'artisan</h2>
+                                <p id="artisanDescription">Chargement...</p>
+
+                                <div class="skills-section">
+                                    <h3>Compétences</h3>
+                                    <div id="skillsList" class="skills-list">
+                                        <!-- Skills will be loaded dynamically -->
+                                    </div>
+                                </div>
+
+                                <div class="services-section">
+                                    <h3>Services proposés</h3>
+                                    <div id="servicesList" class="services-list">
+                                        <!-- Services will be loaded dynamically -->
+                                    </div>
+                                </div>
+
+                                <div class="verification-section">
+                                    <h3>Informations de vérification</h3>
+                                    <div id="verificationInfo" class="verification-info">
+                                        <!-- Verification info will be loaded dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Portfolio Tab -->
+                        <div id="portfolioTab" class="tab-pane hidden">
+                            <div class="portfolio-section">
+                                <h2>Réalisations</h2>
+                                <div id="portfolioGrid" class="portfolio-grid">
+                                    <!-- Portfolio items will be loaded dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reviews Tab -->
+                        <div id="reviewsTab" class="tab-pane hidden">
+                            <div class="reviews-section">
+                                <h2>Avis clients</h2>
+                                <div id="reviewsList" class="reviews-list">
+                                    <!-- Reviews will be loaded dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/artisan-profile.js"></script>
+</body>
+</html>

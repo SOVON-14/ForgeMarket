@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Commandes - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="dashboard.html">Tableau de bord</a></li>
+                    <li><a href="orders.html" class="active">Commandes</a></li>
+                    <li class="nav-auth">
+                        <a href="dashboard.html" class="btn btn-outline">Mon compte</a>
+                        <button onclick="logout()" class="btn btn-primary">Déconnexion</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="orders-page">
+            <div class="container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1>Mes Commandes</h1>
+                    <p>Suivez l'avancement de vos commandes</p>
+                </div>
+
+                <!-- Order Progress (5 orders rule) -->
+                <div class="order-progress-section">
+                    <div class="progress-card">
+                        <h3>Progression vers les demandes de devis</h3>
+                        <p>Commandes finalisées : <span id="completedOrders">0</span>/5</p>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                        </div>
+                        <p id="progressMessage" class="progress-message">Complétez 5 commandes pour débloquer l'accès aux demandes de devis détaillées</p>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="orders-filters">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">Toutes</button>
+                        <button class="filter-tab" data-filter="en_attente">En attente</button>
+                        <button class="filter-tab" data-filter="confirmee">Confirmées</button>
+                        <button class="filter-tab" data-filter="en_fabrication">En fabrication</button>
+                        <button class="filter-tab" data-filter="en_livraison">En livraison</button>
+                        <button class="filter-tab" data-filter="finalisee">Finalisées</button>
+                    </div>
+                </div>
+
+                <!-- Orders List -->
+                <div class="orders-list" id="ordersList">
+                    <div class="spinner"></div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="empty-state hidden">
+                    <h3>Aucune commande</h3>
+                    <p>Vous n'avez pas encore de commande. Commencez par consulter nos artisans.</p>
+                    <a href="artisans.html" class="btn btn-primary">Découvrir les artisans</a>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/orders.js"></script>
+</body>
+</html>

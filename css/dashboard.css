@@ -1,0 +1,357 @@
+/* ForgeMarket - User Dashboard Styles */
+
+.dashboard-page {
+    padding: 2rem 0;
+    background-color: var(--background-color);
+    min-height: calc(100vh - 200px);
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.welcome-section h1 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.welcome-section p {
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Progress Section */
+.progress-section {
+    margin-bottom: 2rem;
+}
+
+.progress-card {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.progress-header h2 {
+    color: var(--white);
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.progress-count {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.progress-bar-container {
+    background-color: rgba(255, 255, 255, 0.3);
+    height: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--success);
+    transition: width 0.5s ease;
+    border-radius: 12px;
+}
+
+.progress-message {
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.progress-message.unlocked {
+    color: #90EE90;
+    font-weight: 600;
+}
+
+/* Quick Stats */
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-info h3 {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin: 0 0 0.25rem 0;
+    text-transform: uppercase;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.dashboard-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Recent Lists */
+.recent-list,
+.messages-list,
+.actions-list,
+.artisans-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.list-item:hover {
+    background-color: rgba(194, 101, 42, 0.1);
+}
+
+.item-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--neutral-color);
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.item-details {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* Action Items */
+.action-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+}
+
+.action-icon {
+    font-size: 1.5rem;
+}
+
+.action-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-content p {
+    margin: 0;
+    color: var(--text-color);
+}
+
+/* Loyalty Info */
+.loyalty-info {
+    text-align: center;
+}
+
+.loyalty-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #cd7f32 0%, #8b4513 100%);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+
+.badge-icon {
+    font-size: 2rem;
+}
+
+.badge-level {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.loyalty-description {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.loyalty-progress {
+    background-color: #eee;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.loyalty-bar {
+    height: 100%;
+    background: linear-gradient(to right, #cd7f32, #c0c0c0);
+    transition: width 0.5s ease;
+}
+
+.loyalty-next {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background-color: var(--background-color);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    background: none;
+}
+
+.action-btn:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(194, 101, 42, 0.1);
+}
+
+.action-btn .action-icon {
+    font-size: 1.5rem;
+}
+
+.action-btn span:last-child {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+}
+
+.empty-state p {
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quick-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .action-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

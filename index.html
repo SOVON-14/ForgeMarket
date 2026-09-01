@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForgeMarket - Plateforme de mise en relation entre clients et forgerons au Togo</title>
+    <meta name="description" content="ForgeMarket est une plateforme web spécialisée dans la mise en relation entre clients et forgerons/soudeurs au Togo.">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#C2652A">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="about.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth">
+                        <a href="login.html" class="btn btn-outline">Connexion</a>
+                        <a href="register.html" class="btn btn-primary">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h2>Trouvez les meilleurs forgerons et soudeurs au Togo</h2>
+                        <p>Une plateforme sécurisée pour découvrir des artisans vérifiés, consulter leurs réalisations et passer des commandes en toute confiance.</p>
+                        <div class="hero-actions">
+                            <a href="artisans.html" class="btn btn-primary btn-large">Découvrir les artisans</a>
+                            <a href="register.html" class="btn btn-outline btn-large">S'inscrire</a>
+                        </div>
+                    </div>
+                    <div class="hero-search">
+                        <div class="search-box">
+                            <input type="text" placeholder="Rechercher un artisan, un service..." class="search-input">
+                            <select class="search-select">
+                                <option value="">Toutes les catégories</option>
+                                <option value="ferronnerie">Ferronnerie</option>
+                                <option value="soudure">Soudure</option>
+                                <option value="construction_metallique">Construction métallique</option>
+                                <option value="menuiserie_metal">Menuiserie métallique</option>
+                            </select>
+                            <button class="btn btn-primary">Rechercher</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features">
+                <div class="container">
+                    <h2>Pourquoi choisir ForgeMarket ?</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                            <h3>Artisans vérifiés</h3>
+                            <p>Tous nos artisans sont vérifiés et leurs identités confirmées pour votre sécurité.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-star"></i></div>
+                            <h3>Évaluations transparentes</h3>
+                            <p>Score ForgeMarket basé sur des évaluations réelles et un système de réputation fiable.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                            <h3>Transactions sécurisées</h3>
+                            <p>Suivi complet des commandes et système de litiges pour résoudre les problèmes.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <h3>Accessible partout</h3>
+                            <p>Plateforme optimisée pour mobile, tablette et ordinateur, même sur connexion 3G.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How it works -->
+            <section class="how-it-works">
+                <div class="container">
+                    <h2>Comment ça marche ?</h2>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number"><i class="fas fa-user-plus"></i></div>
+                            <h3>Inscrivez-vous</h3>
+                            <p>Créez votre compte client en quelques minutes.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number"><i class="fas fa-search"></i></div>
+                            <h3>Consultez les artisans</h3>
+                            <p>Découvrez les profils, portfolios et évaluations des artisans.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number"><i class="fas fa-shopping-cart"></i></div>
+                            <h3>Passez commande</h3>
+                            <p>Commandez directement ou lancez un appel d'offres.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number"><i class="fas fa-star"></i></div>
+                            <h3>Suivez et évaluez</h3>
+                            <p>Suivez l'avancement et évaluez le travail réalisé.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Artisans vérifiés</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Commandes réalisées</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.8/5</div>
+                            <div class="stat-label">Note moyenne</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Villes couvertes</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta">
+                <div class="container">
+                    <h2>Prêt à trouver votre artisan ?</h2>
+                    <p>Rejoignez des centaines de clients satisfaits sur ForgeMarket</p>
+                    <a href="register.html" class="btn btn-primary btn-large">Commencer maintenant</a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h3>ForgeMarket</h3>
+                        <p>La plateforme de référence pour trouver des forgerons et soudeurs vérifiés au Togo.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Liens rapides</h3>
+                        <ul>
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="artisans.html">Artisans</a></li>
+                            <li><a href="about.html">À propos</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Légal</h3>
+                        <ul>
+                            <li><a href="cgu.html">CGU</a></li>
+                            <li><a href="cgv.html">CGV</a></li>
+                            <li><a href="privacy.html">Politique de confidentialité</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <ul>
+                            <li>Email: contact@forgemarket.tg</li>
+                            <li>Tél: +228 90 00 00 00</li>
+                            <li>Lomé, Togo</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

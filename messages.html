@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/messages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="dashboard.html">Tableau de bord</a></li>
+                    <li><a href="orders.html">Commandes</a></li>
+                    <li class="nav-auth">
+                        <a href="dashboard.html" class="btn btn-outline">Mon compte</a>
+                        <button onclick="logout()" class="btn btn-primary">Déconnexion</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="messages-page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Messagerie</h1>
+                    <p>Communiquez avec les artisans</p>
+                </div>
+
+                <div class="messages-container">
+                    <!-- Conversations List -->
+                    <div class="conversations-sidebar">
+                        <div class="sidebar-header">
+                            <h2>Conversations</h2>
+                            <button class="btn btn-primary btn-small" id="newConversationBtn">+ Nouveau</button>
+                        </div>
+                        <div class="conversations-list" id="conversationsList">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Area -->
+                    <div class="chat-area">
+                        <div id="noConversationSelected" class="no-conversation">
+                            <div class="no-conversation-content">
+                                <h3>Sélectionnez une conversation</h3>
+                                <p>Choisissez une conversation dans la liste pour commencer à discuter</p>
+                            </div>
+                        </div>
+
+                        <div id="conversationView" class="conversation-view hidden">
+                            <div class="conversation-header">
+                                <button class="back-button mobile-only" onclick="showConversationsList()">←</button>
+                                <div class="conversation-info">
+                                    <img id="conversationAvatar" src="" alt="" class="conversation-avatar">
+                                    <div>
+                                        <h3 id="conversationName">Nom de l'artisan</h3>
+                                        <p id="conversationStatus">En ligne</p>
+                                    </div>
+                                </div>
+                                <div class="conversation-actions">
+                                    <button class="btn btn-outline btn-small" onclick="viewOrder()">Voir la commande</button>
+                                    <button class="btn btn-outline btn-small" onclick="reportUser()">Signaler</button>
+                                </div>
+                            </div>
+
+                            <div class="messages-list" id="messagesList">
+                                <!-- Messages will be loaded dynamically -->
+                            </div>
+
+                            <div class="message-input-area">
+                                <div class="input-actions">
+                                    <button class="action-btn" id="attachFileBtn" title="Joindre un fichier">📎</button>
+                                    <button class="action-btn" id="attachImageBtn" title="Joindre une image">🖼️</button>
+                                    <button class="action-btn" id="voiceRecordBtn" title="Message vocal">🎤</button>
+                                </div>
+                                <div class="input-wrapper">
+                                    <textarea id="messageInput" class="message-input" placeholder="Écrivez votre message..." rows="1"></textarea>
+                                    <button class="btn btn-primary" id="sendMessageBtn">Envoyer</button>
+                                </div>
+                                <input type="file" id="fileInput" class="hidden" multiple>
+                                <input type="file" id="imageInput" class="hidden" accept="image/*" multiple>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- New Conversation Modal -->
+        <div id="newConversationModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Nouvelle conversation</h2>
+                    <button class="modal-close" onclick="closeNewConversationModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="newConversationArtisan" class="form-label">Sélectionner un artisan</label>
+                        <select id="newConversationArtisan" class="form-select">
+                            <option value="">Choisir un artisan</option>
+                            <!-- Artisans will be loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="newConversationMessage" class="form-label">Message</label>
+                        <textarea id="newConversationMessage" class="form-textarea" placeholder="Votre premier message..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" onclick="closeNewConversationModal()">Annuler</button>
+                    <button class="btn btn-primary" onclick="startNewConversation()">Démarrer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/messages.js"></script>
+</body>
+</html>
