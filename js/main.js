@@ -35,10 +35,15 @@ function loadUserSession() {
     }
 }
 
-function saveUserSession(user) {
-    AppState.currentUser = user;
+function saveUserSession(user, token = null) {
+    const normalizedUser = {
+        ...user,
+        ...(token ? { token } : {})
+    };
+
+    AppState.currentUser = normalizedUser;
     AppState.isAuthenticated = true;
-    localStorage.setItem('forgeMarket_user', JSON.stringify(user));
+    localStorage.setItem('forgeMarket_user', JSON.stringify(normalizedUser));
     updateUIForAuthenticatedUser();
 }
 
@@ -68,11 +73,28 @@ function updateUIForAuthenticatedUser() {
 
 // Authentication Functions
 function checkAuthentication() {
-    const protectedRoutes = ['dashboard.html', 'orders.html', 'messages.html', 'profile.html'];
+    const protectedRoutes = [
+        'dashboard.html',
+        'orders.html',
+        'messages.html',
+        'review.html',
+        'create-quote.html',
+        'profile.html',
+        'admin-dashboard.html',
+        'admin-users.html',
+        'admin-artisans.html',
+        'admin-orders.html',
+        'admin-disputes.html'
+    ];
     const currentPath = window.location.pathname.split('/').pop();
 
     if (protectedRoutes.includes(currentPath) && !AppState.isAuthenticated) {
         window.location.href = 'login.html';
+        return;
+    }
+
+    if ((currentPath === 'login.html' || currentPath === 'register.html') && AppState.isAuthenticated) {
+        window.location.href = 'dashboard.html';
     }
 }
 
@@ -112,6 +134,9 @@ function showNotification(message, type = 'info') {
 function initializeForms() {
     const forms = document.querySelectorAll('form[data-ajax="true"]');
     forms.forEach(form => {
+        if (form.id === 'loginForm' || form.id === 'registerForm') {
+            return;
+        }
         form.addEventListener('submit', handleFormSubmit);
     });
 }
@@ -285,7 +310,7 @@ function updateOrderProgress(currentOrders, targetOrders = 5) {
 // Service Worker Registration (for PWA)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('./sw.js')
             .then(registration => {
                 console.log('ServiceWorker registration successful');
             })

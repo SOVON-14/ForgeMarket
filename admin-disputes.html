@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litiges - ForgeMarket Admin</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar admin-nav">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html"><h1>ForgeMarket <span class="admin-badge">Admin</span></h1></a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="admin-dashboard.html">Tableau de bord</a></li>
+                    <li><a href="admin-users.html">Utilisateurs</a></li>
+                    <li><a href="admin-artisans.html">Artisans</a></li>
+                    <li><a href="admin-orders.html">Commandes</a></li>
+                    <li><a href="admin-disputes.html" class="active">Litiges</a></li>
+                    <li class="nav-auth"><button onclick="logout()" class="btn btn-primary">Déconnexion</button></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="container" style="padding: 5rem 0;">
+            <h2>Gestion des litiges</h2>
+            <p>Cette page admin sera connectée à la liste des litiges.</p>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>
