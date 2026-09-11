@@ -58,28 +58,6 @@ async function loadConversations() {
     }
 }
 
-// Generate Mock Conversations
-function generateMockConversations() {
-    const artisans = ['Kofi A.', 'Komlan M.', 'Yawo K.', 'Afi B.'];
-    const lastMessages = [
-        'Bonjour, je suis disponible pour votre projet',
-        'Pouvez-vous me donner plus de détails ?',
-        'Le devis est prêt, je vous l\'envoie',
-        'Merci pour votre confiance !'
-    ];
-
-    return Array.from({ length: 4 }, (_, i) => ({
-        id: i + 1,
-        artisanId: i + 1,
-        artisanName: artisans[i],
-        artisanAvatar: `https://via.placeholder.com/50/C2652A/FFFFFF?text=${artisans[i][0]}`,
-        lastMessage: lastMessages[i],
-        lastMessageTime: new Date(Date.now() - (i * 3600000)).toISOString(),
-        unread: i === 0,
-        online: i % 2 === 0
-    }));
-}
-
 // Display Conversations
 function displayConversations(convs) {
     const conversationsList = document.getElementById('conversationsList');
@@ -153,35 +131,6 @@ async function loadMessages(conversationId) {
             </div>
         `;
     }
-}
-
-// Generate Mock Messages
-function generateMockMessages(conversationId) {
-    const myMessages = [
-        'Bonjour, je voudrais discuter de mon projet',
-        'Il s\'agit d\'un portail en fer forgé',
-        'Quels sont vos tarifs ?'
-    ];
-    const artisanMessages = [
-        'Bonjour ! Je suis à votre écoute',
-        'Excellent choix ! Pouvez-vous me donner les dimensions ?',
-        'Mes tarifs commencent à 50 000 FCFA selon la complexité'
-    ];
-
-    const msgs = [];
-    for (let i = 0; i < 6; i++) {
-        const isMine = i % 2 === 0;
-        msgs.push({
-            id: i + 1,
-            conversationId: conversationId,
-            sender: isMine ? 'me' : 'artisan',
-            content: isMine ? myMessages[i / 2] : artisanMessages[Math.floor(i / 2)],
-            timestamp: new Date(Date.now() - ((5 - i) * 600000)).toISOString(),
-            status: isMine ? 'read' : null
-        });
-    }
-
-    return msgs;
 }
 
 // Display Messages

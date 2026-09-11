@@ -35,13 +35,13 @@ async function loadDashboardStats() {
             const response = await fetch('/api/v1/admin-dashboard.php');
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || 'Statistiques indisponibles');
-            const mockStats = result.data.stats;
+            const stats = result.data.stats;
 
         // Animate numbers
-        animateNumber('totalUsers', mockStats.totalUsers);
-        animateNumber('totalArtisans', mockStats.totalArtisans);
-        animateNumber('totalOrders', mockStats.totalOrders);
-        document.getElementById('totalRevenue').textContent = formatCurrency(mockStats.totalRevenue);
+        animateNumber('totalUsers', stats.totalUsers);
+        animateNumber('totalArtisans', stats.totalArtisans);
+        animateNumber('totalOrders', stats.totalOrders);
+        document.getElementById('totalRevenue').textContent = formatCurrency(stats.totalRevenue);
 
     } catch (error) {
         console.error('Error loading stats:', error);
@@ -61,9 +61,9 @@ async function loadPendingArtisans() {
             const response = await fetch('/api/v1/admin-dashboard.php');
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || 'Artisans indisponibles');
-            const mockArtisans = result.data.pendingArtisans;
+            const artisans = result.data.pendingArtisans;
 
-        pendingArtisans.innerHTML = mockArtisans.map(artisan => `
+        pendingArtisans.innerHTML = artisans.map(artisan => `
             <div class="list-item">
                 <img src="https://via.placeholder.com/40/C2652A/FFFFFF?text=${artisan.name[0]}" alt="${artisan.name}" class="item-avatar">
                 <div class="item-info">
@@ -96,9 +96,9 @@ async function loadRecentOrders() {
             const response = await fetch('/api/v1/admin-dashboard.php');
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || 'Commandes indisponibles');
-            const mockOrders = result.data.recentOrders;
+            const orders = result.data.recentOrders;
 
-        recentOrders.innerHTML = mockOrders.map(order => `
+        recentOrders.innerHTML = orders.map(order => `
             <div class="list-item">
                 <div class="item-info">
                         <div class="item-name">Commande #${order.id}</div>
@@ -130,9 +130,9 @@ async function loadActiveDisputes() {
             const response = await fetch('/api/v1/admin-dashboard.php');
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || 'Litiges indisponibles');
-            const mockDisputes = result.data.activeDisputes;
+            const disputes = result.data.activeDisputes;
 
-        activeDisputes.innerHTML = mockDisputes.map(dispute => `
+        activeDisputes.innerHTML = disputes.map(dispute => `
             <div class="list-item">
                 <div class="item-info">
                     <div class="item-name">${dispute.id} - ${dispute.type}</div>

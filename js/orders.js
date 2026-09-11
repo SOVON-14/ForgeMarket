@@ -57,40 +57,6 @@ async function loadOrders() {
     }
 }
 
-// Generate Mock Orders Data
-function generateMockOrders() {
-    const statuses = ['en_attente', 'confirmee', 'en_fabrication', 'en_livraison', 'livree', 'finalisee', 'annulee'];
-    const artisans = ['Kofi A.', 'Komlan M.', 'Yawo K.', 'Afi B.'];
-    const descriptions = [
-        'Fabrication d\'un portail en fer forgé de 3m de large',
-        'Construction d\'une structure métallique pour hangar',
-        'Réparation de toiture en tôle ondulée',
-        'Fabrication de fenêtres métalliques sur mesure',
-        'Installation de clôture avec portail automatique'
-    ];
-
-    return Array.from({ length: 6 }, (_, i) => {
-        const status = statuses[i % statuses.length];
-        const artisan = artisans[i % artisans.length];
-        const description = descriptions[i % descriptions.length];
-
-        return {
-            id: `ORD-${String(i + 1).padStart(4, '0')}`,
-            title: description.substring(0, 50) + '...',
-            description: description,
-            artisan: artisan,
-            artisanId: i + 1,
-            status: status,
-            price: Math.floor(Math.random() * 200000) + 50000,
-            createdAt: new Date(Date.now() - (i * 7 * 24 * 60 * 60 * 1000)).toISOString(),
-            expectedDelivery: new Date(Date.now() + ((7 - i) * 24 * 60 * 60 * 1000)).toISOString(),
-            actualDelivery: status === 'finalisee' || status === 'livree' ? new Date(Date.now() - ((i - 2) * 24 * 60 * 60 * 1000)).toISOString() : null,
-            address: 'Lomé, Togo',
-            isDelayed: status === 'en_fabrication' && i === 2
-        };
-    });
-}
-
 // Display Orders
 function displayOrders(orders) {
     const ordersList = document.getElementById('ordersList');

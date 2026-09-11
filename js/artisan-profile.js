@@ -57,44 +57,6 @@ async function loadArtisanProfile(artisanId) {
     }
 }
 
-// Generate Mock Artisan Profile Data
-function generateMockArtisanProfile(id) {
-    const specialties = ['Ferronnerie', 'Soudure', 'Construction métallique', 'Menuiserie métallique'];
-    const locations = ['Lomé', 'Sokodé', 'Kara', 'Atsapié', 'Tsévié'];
-    const names = ['Kofi A.', 'Komlan M.', 'Yawo K.', 'Afi B.', 'Kokou T.'];
-
-    const specialty = specialties[id % specialties.length];
-    const location = locations[id % locations.length];
-    const name = names[id % names.length];
-
-    return {
-        id: parseInt(id),
-        name: name,
-        specialty: specialty,
-        location: location,
-        rating: (4 + Math.random()).toFixed(1),
-        reviewCount: Math.floor(Math.random() * 50) + 10,
-        ordersCount: Math.floor(Math.random() * 100) + 20,
-        experienceYears: Math.floor(Math.random() * 15) + 3,
-        responseRate: Math.floor(Math.random() * 30) + 70,
-        verified: Math.random() > 0.3,
-        available: Math.random() > 0.3,
-        image: `https://via.placeholder.com/300x300/C2652A/FFFFFF?text=${encodeURIComponent(name)}`,
-        description: `Artisan expérimenté en ${specialty.toLowerCase()} avec plus de ${Math.floor(Math.random() * 15) + 3} ans d'expérience. Spécialisé dans les travaux sur mesure et la rénovation. Je m'engage à fournir un travail de qualité avec des matériaux durables.`,
-        skills: ['Soudure MIG/MAG', 'Découpe laser', 'Finition', 'Installation', 'Réparation', 'Conception sur mesure'],
-        services: [
-            'Fabrication de portails et clôtures',
-            'Construction de structures métalliques',
-            'Réparation et entretien',
-            'Travaux de ferronnerie d\'art',
-            'Menuiserie métallique',
-            'Installation et montage'
-        ],
-        verificationDate: '2023-06-15',
-        verificationDocuments: ['Carte d\'identité', 'Registre de commerce', 'Attestation de formation']
-    };
-}
-
 // Populate Profile Data
 function populateProfileData(artisan) {
     // Basic info

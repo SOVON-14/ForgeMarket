@@ -86,10 +86,10 @@ async function initializeArtisanSelect() {
         const response = await fetch('/api/v1/artisans/index.php');
         const responseData = await response.json();
         if (!response.ok) throw new Error(responseData.error || 'Artisans indisponibles');
-        const mockArtisans = responseData.data || [];
+        const artisans = responseData.data || [];
 
         artisanSelect.innerHTML = '<option value="">Sélectionnez un artisan</option>' +
-            mockArtisans.map(artisan =>
+            artisans.map(artisan =>
                 `<option value="${artisan.id}">${artisan.name} - ${artisan.specialty}</option>`
             ).join('');
 

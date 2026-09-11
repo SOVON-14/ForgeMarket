@@ -51,21 +51,6 @@ async function loadOrderDetails() {
     }
 }
 
-// Generate Mock Order Data
-function generateMockOrder(orderId) {
-    return {
-        id: orderId,
-        title: 'Fabrication d\'un portail en fer forgé',
-        artisan: 'Kofi A.',
-        artisanId: 1,
-        price: 150000,
-        status: 'finalisee',
-        createdAt: '2024-01-15',
-        completedAt: '2024-01-20',
-        address: 'Lomé, Togo'
-    };
-}
-
 // Display Order Details
 function displayOrderDetails(order) {
     const orderDetails = document.getElementById('orderDetails');
