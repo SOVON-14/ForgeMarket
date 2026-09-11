@@ -28,13 +28,10 @@ async function loadConversations() {
     const conversationsList = document.getElementById('conversationsList');
 
     try {
-        // Simulate API call
-        // const response = await fetch('/api/v1/conversations');
-        // const data = await response.json();
-
-        // Mock data
-        const mockConversations = generateMockConversations();
-        conversations = mockConversations;
+        const response = await fetch('/api/v1/messages.php');
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Conversations indisponibles');
+        conversations = data.data || [];
 
         displayConversations(conversations);
 
@@ -91,12 +88,12 @@ function displayConversations(convs) {
         <div class="conversation-item ${conv.unread ? 'unread' : ''} ${currentConversation === conv.id ? 'active' : ''}"
              onclick="selectConversation(${conv.id})">
             <div class="conversation-header">
-                <img src="${conv.artisanAvatar}" alt="${conv.artisanName}" class="conversation-avatar">
+                <img src="${conv.artisanAvatar}" alt="${escapeHtml(conv.artisanName)}" class="conversation-avatar">
                 <div>
-                    <h4 class="conversation-name">${conv.artisanName}</h4>
+                    <h4 class="conversation-name">${escapeHtml(conv.artisanName)}</h4>
                 </div>
             </div>
-            <p class="conversation-preview">${conv.lastMessage}</p>
+            <p class="conversation-preview">${escapeHtml(conv.lastMessage)}</p>
             <div class="conversation-meta">
                 <span>${formatTime(conv.lastMessageTime)}</span>
                 ${conv.unread ? '<span class="unread-badge">Nouveau</span>' : ''}
@@ -140,13 +137,10 @@ async function loadMessages(conversationId) {
     const messagesList = document.getElementById('messagesList');
 
     try {
-        // Simulate API call
-        // const response = await fetch(`/api/v1/conversations/${conversationId}/messages`);
-        // const data = await response.json();
-
-        // Mock data
-        const mockMessages = generateMockMessages(conversationId);
-        messages = mockMessages;
+        const response = await fetch(`/api/v1/messages.php?user_id=${encodeURIComponent(conversationId)}`);
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Messages indisponibles');
+        messages = (data.data || []).map(message => ({ ...message, conversationId, content: message.body, timestamp: message.created_at, status: message.read_at ? 'read' : 'sent' }));
 
         displayMessages(messages);
         scrollToBottom();
@@ -200,7 +194,7 @@ function displayMessages(msgs) {
                 <span class="message-sender">${msg.sender === 'me' ? 'Vous' : 'Artisan'}</span>
                 <span class="message-time">${formatTime(msg.timestamp)}</span>
             </div>
-            <div class="message-content">${msg.content}</div>
+            <div class="message-content">${escapeHtml(msg.content)}</div>
             ${msg.sender === 'me' ? `<div class="message-status">${getMessageStatus(msg.status)}</div>` : ''}
         </div>
     `).join('');
@@ -210,11 +204,11 @@ function displayMessages(msgs) {
 function getMessageStatus(status) {
     switch (status) {
         case 'sent':
-            return '✓';
+            return '<i class="fas fa-check"></i>';
         case 'delivered':
-            return '✓✓';
+            return '<i class="fas fa-check-double"></i>';
         case 'read':
-            return '✓✓ (lu)';
+            return '<i class="fas fa-check-double"></i> (lu)';
         default:
             return '';
     }
@@ -245,40 +239,13 @@ function initializeMessageInput() {
 }
 
 // Send Message
-function sendMessage() {
+async function sendMessage() {
     const messageInput = document.getElementById('messageInput');
     const content = messageInput.value.trim();
 
     if (!content || !currentConversation) return;
 
-    const newMessage = {
-        id: messages.length + 1,
-        conversationId: currentConversation,
-        sender: 'me',
-        content: content,
-        timestamp: new Date().toISOString(),
-        status: 'sent'
-    };
-
-    messages.push(newMessage);
-    displayMessages(messages);
-    scrollToBottom();
-
-    // Clear input
-    messageInput.value = '';
-    messageInput.style.height = 'auto';
-
-    // Update conversation preview
-    const conversation = conversations.find(c => c.id === currentConversation);
-    if (conversation) {
-        conversation.lastMessage = content;
-        conversation.lastMessageTime = new Date().toISOString();
-        displayConversations(conversations);
-    }
-
-    // Simulate API call
-    // In real app, send to server via WebSocket or HTTP
-    console.log('Sending message:', newMessage);
+    try { const response = await fetch('/api/v1/messages.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ recipientUserId: currentConversation, body: content }) }); const result = await response.json(); if (!response.ok) throw new Error(result.error || 'Message impossible à envoyer'); messageInput.value = ''; messageInput.style.height = 'auto'; await loadMessages(currentConversation); await loadConversations(); } catch (error) { showNotification(error.message, 'error'); }
 }
 
 // Initialize File Attachments
@@ -331,15 +298,12 @@ function initializeNewConversationModal() {
     });
 }
 
-function loadArtisansForNewConversation() {
+async function loadArtisansForNewConversation() {
     const select = document.getElementById('newConversationArtisan');
 
-    // Mock data
-    const mockArtisans = [
-        { id: 1, name: 'Kofi A.', specialty: 'Ferronnerie' },
-        { id: 2, name: 'Komlan M.', specialty: 'Soudure' },
-        { id: 3, name: 'Yawo K.', specialty: 'Construction métallique' }
-    ];
+    const response = await fetch('/api/v1/artisans/index.php');
+    const data = await response.json();
+    const mockArtisans = data.data || [];
 
     select.innerHTML = '<option value="">Choisir un artisan</option>' +
         mockArtisans.map(artisan =>
@@ -365,31 +329,9 @@ function startNewConversation() {
     closeNewConversationModal();
 }
 
-function createConversationWithArtisan(artisanId, initialMessage = '') {
-    // In real app, call API to create conversation
-    const newConversation = {
-        id: conversations.length + 1,
-        artisanId: artisanId,
-        artisanName: 'Nouvel Artisan',
-        artisanAvatar: `https://via.placeholder.com/50/C2652A/FFFFFF?text=NA`,
-        lastMessage: initialMessage || 'Nouvelle conversation',
-        lastMessageTime: new Date().toISOString(),
-        unread: false,
-        online: false
-    };
-
-    conversations.unshift(newConversation);
-    displayConversations(conversations);
-    selectConversation(newConversation.id);
-
-    if (initialMessage) {
-        // Send initial message
-        setTimeout(() => {
-            const messageInput = document.getElementById('messageInput');
-            messageInput.value = initialMessage;
-            sendMessage();
-        }, 100);
-    }
+async function createConversationWithArtisan(artisanId, initialMessage = '') {
+    if (!initialMessage) return;
+    try { const response = await fetch('/api/v1/messages.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ artisanId, body: initialMessage }) }); const result = await response.json(); if (!response.ok) throw new Error(result.error || 'Conversation impossible à créer'); await loadConversations(); const conversation = conversations.find(item => item.artisanId === Number(artisanId)); if (conversation) selectConversation(conversation.id); } catch (error) { showNotification(error.message, 'error'); }
 }
 
 // Utility Functions
@@ -413,6 +355,8 @@ function scrollToBottom() {
     const messagesList = document.getElementById('messagesList');
     messagesList.scrollTop = messagesList.scrollHeight;
 }
+
+function escapeHtml(value) { return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' }[character])); }
 
 function viewOrder() {
     // Navigate to order details if linked to an order

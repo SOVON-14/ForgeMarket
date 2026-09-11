@@ -34,15 +34,12 @@ async function loadOrderDetails() {
     const orderDetails = document.getElementById('orderDetails');
 
     try {
-        // Simulate API call
-        // const response = await fetch(`/api/v1/orders/${orderId}`);
-        // const data = await response.json();
+        const response = await fetch(`/api/v1/reviews.php?order_id=${encodeURIComponent(orderId)}`);
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Commande indisponible');
+        currentOrder = data.data;
 
-        // Mock data
-        const mockOrder = generateMockOrder(orderId);
-        currentOrder = mockOrder;
-
-        displayOrderDetails(mockOrder);
+        displayOrderDetails(currentOrder);
     } catch (error) {
         console.error('Error loading order details:', error);
         orderDetails.innerHTML = `
@@ -214,7 +211,7 @@ function initializeReviewForm() {
             commentInput.addEventListener('input', function() {
                 const length = this.value.length;
                 if (length >= 20) {
-                    charCount.textContent = `${length} caractères ✓`;
+                    charCount.textContent = `${length} caractères <i class="fas fa-check"></i>`;
                     charCount.style.color = 'var(--success)';
                 } else {
                     charCount.textContent = `${length}/20 caractères minimum`;
@@ -254,17 +251,16 @@ function initializeReviewForm() {
             }
 
             try {
-                // Simulate API call
-                // const response = await fetch('/api/v1/reviews', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify(reviewData)
-                // });
-
-                console.log('Review data:', reviewData);
+                const response = await fetch('/api/v1/reviews.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(reviewData)
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.error || 'Évaluation impossible');
 
                 // Show success message
-                alert('Merci pour votre évaluation ! Elle aidera la communauté ForgeMarket.');
+                alert(result.message || 'Merci pour votre évaluation !');
 
                 // Redirect to orders
                 window.location.href = 'orders.html';

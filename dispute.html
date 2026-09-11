@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signaler un problème - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/orders.css">
+</head>
+<body>
+    <div id="app"><nav class="navbar"><div class="container"><div class="nav-brand"><a href="index.html"><h1>ForgeMarket</h1></a></div><ul class="nav-menu"><li><a href="dashboard.html">Tableau de bord</a></li><li><a href="orders.html">Commandes</a></li><li class="nav-auth"><button onclick="logout()" class="btn btn-primary">Déconnexion</button></li></ul></div></nav><main class="container" style="padding: 5rem 0; max-width: 760px;"><div class="page-header"><h1>Signaler un problème</h1><p>Décrivez la situation afin que notre équipe puisse examiner votre commande.</p></div><form id="disputeForm" class="auth-card"><div class="form-group"><label for="reason" class="form-label">Motif</label><input id="reason" name="reason" class="form-input" required maxlength="255" placeholder="Ex : retard, qualité non conforme"></div><div class="form-group"><label for="description" class="form-label">Description</label><textarea id="description" name="description" class="form-textarea" required minlength="10" placeholder="Expliquez précisément le problème rencontré."></textarea></div><div class="form-actions"><button type="submit" class="btn btn-primary btn-large">Ouvrir le litige</button><a href="orders.html" class="btn btn-outline btn-large">Annuler</a></div></form></main><footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 ForgeMarket. Tous droits réservés.</p></div></div></footer></div>
+    <script src="js/main.js"></script><script src="js/navigation.js"></script><script src="js/dispute.js"></script>
+</body>
+</html>

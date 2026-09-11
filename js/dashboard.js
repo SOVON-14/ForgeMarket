@@ -11,6 +11,8 @@ function initializeDashboard() {
     loadRecentOrders();
     loadRecentMessages();
     loadRecommendedArtisans();
+    loadPendingActions();
+    loadClientQuotes();
 }
 
 // Check Authentication
@@ -53,23 +55,15 @@ function updateProgressSection(completedOrders) {
 // Load Dashboard Stats
 async function loadDashboardStats() {
     try {
-        // Simulate API call
-        // const response = await fetch('/api/v1/dashboard/stats');
-        // const data = await response.json();
+        const response = await fetch('/api/v1/dashboard.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Statistiques indisponibles');
+        const stats = result.data;
+        document.getElementById('totalOrders').textContent = stats.totalOrders;
+        document.getElementById('unreadMessages').textContent = stats.unreadMessages;
+        document.getElementById('reviewsGiven').textContent = stats.reviewsGiven;
+        updateProgressSection(stats.completedOrders);
 
-        // Mock data
-        const mockStats = {
-            totalOrders: 8,
-            unreadMessages: 3,
-            reviewsGiven: 5,
-            favoritesCount: 2
-        };
-
-        document.getElementById('totalOrders').textContent = mockStats.totalOrders;
-        document.getElementById('unreadMessages').textContent = mockStats.unreadMessages;
-        document.getElementById('reviewsGiven').textContent = mockStats.reviewsGiven;
-
-        // Load favorites from localStorage
         const favorites = JSON.parse(localStorage.getItem('forgeMarket_favorites') || '[]');
         document.getElementById('favoritesCount').textContent = favorites.length;
 
@@ -83,26 +77,18 @@ async function loadRecentOrders() {
     const recentOrders = document.getElementById('recentOrders');
 
     try {
-        // Simulate API call
-        // const response = await fetch('/api/v1/orders/recent');
-        // const data = await response.json();
-
-        // Mock data
-        const mockOrders = [
-            { id: 'ORD-0008', title: 'Portail en fer forgé', status: 'en_fabrication', artisan: 'Kofi A.' },
-            { id: 'ORD-0007', title: 'Structure métallique', status: 'finalisee', artisan: 'Komlan M.' },
-            { id: 'ORD-0006', title: 'Réparation toiture', status: 'en_livraison', artisan: 'Yawo K.' }
-        ];
-
-        recentOrders.innerHTML = mockOrders.map(order => `
+        const response = await fetch('/api/v1/orders.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Commandes indisponibles');
+        recentOrders.innerHTML = (result.data || []).slice(0, 3).map(order => `
             <div class="list-item">
                 <div class="item-info">
-                    <div class="item-name">${order.id}</div>
-                    <div class="item-details">${order.title} • ${order.artisan}</div>
+                    <div class="item-name">Commande #${order.id}</div>
+                    <div class="item-details">${escapeHtml(order.title)} · ${escapeHtml(order.artisan)}</div>
                 </div>
                 <span class="badge badge-${getStatusBadgeClass(order.status)}">${order.status}</span>
             </div>
-        `).join('');
+        `).join('') || '<p class="text-center">Aucune commande récente.</p>';
 
     } catch (error) {
         console.error('Error loading recent orders:', error);
@@ -115,27 +101,19 @@ async function loadRecentMessages() {
     const recentMessages = document.getElementById('recentMessages');
 
     try {
-        // Simulate API call
-        // const response = await fetch('/api/v1/messages/recent');
-        // const data = await response.json();
-
-        // Mock data
-        const mockMessages = [
-            { id: 1, artisan: 'Kofi A.', lastMessage: 'Bonjour, je suis disponible...', time: '2h' },
-            { id: 2, artisan: 'Komlan M.', lastMessage: 'Le devis est prêt', time: '1j' },
-            { id: 3, artisan: 'Yawo K.', lastMessage: 'Merci pour votre confiance', time: '2j' }
-        ];
-
-        recentMessages.innerHTML = mockMessages.map(message => `
+        const response = await fetch('/api/v1/messages.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Messages indisponibles');
+        recentMessages.innerHTML = (result.data || []).slice(0, 3).map(message => `
             <div class="list-item">
-                <img src="https://via.placeholder.com/40/C2652A/FFFFFF?text=${message.artisan[0]}" alt="${message.artisan}" class="item-avatar">
+                <img src="${message.artisanAvatar}" alt="${escapeHtml(message.artisanName)}" class="item-avatar">
                 <div class="item-info">
-                    <div class="item-name">${message.artisan}</div>
-                    <div class="item-details">${message.lastMessage}</div>
+                    <div class="item-name">${escapeHtml(message.artisanName)}</div>
+                    <div class="item-details">${escapeHtml(message.lastMessage)}</div>
                 </div>
-                <span class="item-details">${message.time}</span>
+                <span class="item-details">${formatTime(message.lastMessageTime)}</span>
             </div>
-        `).join('');
+        `).join('') || '<p class="text-center">Aucun message récent.</p>';
 
     } catch (error) {
         console.error('Error loading recent messages:', error);
@@ -148,33 +126,46 @@ async function loadRecommendedArtisans() {
     const recommendedArtisans = document.getElementById('recommendedArtisans');
 
     try {
-        // Simulate API call
-        // const response = await fetch('/api/v1/artisans/recommended');
-        // const data = await response.json();
-
-        // Mock data
-        const mockArtisans = [
-            { id: 1, name: 'Kofi A.', specialty: 'Ferronnerie', rating: 4.8 },
-            { id: 2, name: 'Komlan M.', specialty: 'Soudure', rating: 4.5 },
-            { id: 3, name: 'Yawo K.', specialty: 'Construction métallique', rating: 4.7 }
-        ];
-
-        recommendedArtisans.innerHTML = mockArtisans.map(artisan => `
+        const response = await fetch('/api/v1/artisans/index.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Artisans indisponibles');
+        recommendedArtisans.innerHTML = (result.data || []).slice(0, 3).map(artisan => `
             <div class="list-item">
-                <img src="https://via.placeholder.com/40/C2652A/FFFFFF?text=${artisan.name[0]}" alt="${artisan.name}" class="item-avatar">
+                <img src="${artisan.image}" alt="${escapeHtml(artisan.name)}" class="item-avatar">
                 <div class="item-info">
-                    <div class="item-name">${artisan.name}</div>
-                    <div class="item-details">${artisan.specialty} • ⭐ ${artisan.rating}</div>
+                    <div class="item-name">${escapeHtml(artisan.name)}</div>
+                    <div class="item-details">${escapeHtml(artisan.specialty)} · ${artisan.rating}/5</div>
                 </div>
                 <button class="btn btn-outline btn-small" onclick="viewArtisan(${artisan.id})">Voir</button>
             </div>
-        `).join('');
+        `).join('') || '<p class="text-center">Aucun artisan recommandé.</p>';
 
     } catch (error) {
         console.error('Error loading recommended artisans:', error);
         recommendedArtisans.innerHTML = '<p class="text-center">Erreur de chargement</p>';
     }
 }
+
+async function loadPendingActions() {
+    const pendingActions = document.getElementById('pendingActions');
+    if (!pendingActions) return;
+    try {
+        const response = await fetch('/api/v1/orders.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Commandes indisponibles');
+        const orders = result.data || [];
+        const actions = [];
+        const awaitingConfirmation = orders.filter(order => order.status === 'en_livraison').length;
+        const awaitingReview = orders.filter(order => order.status === 'finalisee').length;
+        if (awaitingConfirmation) actions.push(`<div class="action-item"><span class="action-icon"><i class="fas fa-box"></i></span><div class="action-content"><p>${awaitingConfirmation} commande(s) à confirmer</p><a href="orders.html" class="btn btn-primary btn-small">Voir</a></div></div>`);
+        if (awaitingReview) actions.push(`<div class="action-item"><span class="action-icon"><i class="fas fa-star"></i></span><div class="action-content"><p>${awaitingReview} commande(s) à évaluer</p><a href="orders.html" class="btn btn-primary btn-small">Évaluer</a></div></div>`);
+        pendingActions.innerHTML = actions.join('') || '<p class="text-center">Aucune action en attente.</p>';
+    } catch (error) { console.error('Pending actions error:', error); pendingActions.innerHTML = '<p class="text-center">Impossible de charger les actions.</p>'; }
+}
+
+async function loadClientQuotes() { const grid = document.querySelector('.dashboard-grid'); if (!grid) return; const section = document.createElement('section'); section.className = 'dashboard-card'; section.innerHTML = '<div class="card-header"><h2>Mes demandes de devis</h2></div><div class="card-body" id="clientQuotes"><p class="text-center">Chargement...</p></div>'; grid.prepend(section); try { const response = await fetch('/api/v1/client-quotes.php'); const result = await response.json(); if (!response.ok) throw new Error(result.error || 'Devis indisponibles'); const quotes = result.data || []; document.getElementById('clientQuotes').innerHTML = quotes.length ? quotes.map(renderClientQuote).join('') : '<p class="text-center">Aucune demande de devis.</p>'; } catch (error) { document.getElementById('clientQuotes').innerHTML = `<p class="text-center">${escapeHtml(error.message)}</p>`; } }
+function renderClientQuote(quote) { const responses = quote.responses || []; const responseHtml = responses.length ? responses.map(response => `<div class="list-item"><div class="item-info"><div class="item-name">${escapeHtml(response.artisanName)} · ${response.amount} FCFA</div><div class="item-details">${response.days} jour(s) · ${escapeHtml(response.message)}</div></div>${response.status === 'pending' && quote.status === 'open' ? `<button class="btn btn-primary btn-small" onclick="acceptQuoteResponse(${response.id})">Accepter</button>` : `<span class="item-details">${escapeHtml(response.status)}</span>`}</div>`).join('') : '<p>Aucune proposition reçue.</p>'; return `<article class="list-item"><div class="item-info"><div class="item-name">${escapeHtml(quote.title)}</div><div class="item-details">Statut : ${escapeHtml(quote.status)} · ${responses.length} proposition(s)</div></div><div style="width: 100%;">${responseHtml}</div></article>`; }
+async function acceptQuoteResponse(responseId) { if (!window.confirm('Accepter cette proposition et créer la commande ?')) return; try { const response = await fetch('/api/v1/quote-responses.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'accept', responseId }) }); const result = await response.json(); if (!response.ok) throw new Error(result.error || 'Impossible d’accepter la proposition'); showNotification(result.message, 'success'); window.location.href = 'orders.html'; } catch (error) { showNotification(error.message, 'error'); } }
 
 // View Artisan
 function viewArtisan(artisanId) {
@@ -194,3 +185,10 @@ function getStatusBadgeClass(status) {
     };
     return statusMap[status] || 'secondary';
 }
+
+function formatTime(dateString) {
+    if (!dateString) return '';
+    return new Date(dateString).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+}
+
+function escapeHtml(value) { return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' }[character])); }

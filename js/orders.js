@@ -27,13 +27,10 @@ async function loadOrders() {
     const emptyState = document.getElementById('emptyState');
 
     try {
-        // Simulate API call - replace with actual API endpoint
-        // const response = await fetch('/api/v1/orders');
-        // const data = await response.json();
-
-        // Mock data for demonstration
-        const mockOrders = generateMockOrders();
-        allOrders = mockOrders;
+        const response = await fetch('/api/v1/orders.php');
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Commandes indisponibles');
+        allOrders = data.data || [];
         filteredOrders = [...allOrders];
 
         // Update progress
@@ -299,8 +296,7 @@ function updateOrderProgress() {
 // Order Actions
 function cancelOrder(orderId) {
     if (confirm('Êtes-vous sûr de vouloir annuler cette commande ?')) {
-        // In real app, call API to cancel order
-        console.log('Cancelling order:', orderId);
+        updateOrderStatus(orderId, 'cancel');
     }
 }
 
@@ -314,15 +310,30 @@ function contactArtisan(artisanId) {
 
 function confirmDelivery(orderId) {
     if (confirm('Confirmez-vous avoir reçu la commande ?')) {
-        // In real app, call API to confirm delivery
-        console.log('Confirming delivery:', orderId);
+        updateOrderStatus(orderId, 'complete');
     }
 }
 
 function confirmPayment(orderId) {
     if (confirm('Confirmez-vous avoir effectué le paiement à l\'artisan ?')) {
-        // In real app, call API to confirm payment and finalize order
-        console.log('Confirming payment:', orderId);
+        updateOrderStatus(orderId, 'complete');
+    }
+}
+
+async function updateOrderStatus(orderId, action) {
+    try {
+        const response = await fetch('/api/v1/orders.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ orderId, action })
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Mise à jour impossible');
+        showNotification(result.message, 'success');
+        await loadOrders();
+    } catch (error) {
+        console.error('Order update error:', error);
+        showNotification(error.message, 'error');
     }
 }
 

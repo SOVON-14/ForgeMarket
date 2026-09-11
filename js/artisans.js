@@ -23,13 +23,13 @@ async function loadArtisans() {
     const resultsCount = document.getElementById('resultsCount');
 
     try {
-        // Simulate API call - replace with actual API endpoint
-        // const response = await fetch('/api/v1/artisans');
-        // const data = await response.json();
+        const response = await fetch('/api/v1/artisans/index.php');
+        if (!response.ok) {
+            throw new Error('Artisans API request failed');
+        }
 
-        // Mock data for demonstration
-        const mockArtisans = generateMockArtisans();
-        allArtisans = mockArtisans;
+        const data = await response.json();
+        allArtisans = data.data || [];
         filteredArtisans = [...allArtisans];
 
         displayArtisans(filteredArtisans);
@@ -142,13 +142,13 @@ function generateRatingStars(rating) {
 
     let stars = '';
     for (let i = 0; i < fullStars; i++) {
-        stars += '★';
+        stars += '<i class="fas fa-star"></i>';
     }
     if (hasHalfStar) {
-        stars += '½';
+        stars += '<i class="fas fa-star-half-alt"></i>';
     }
     for (let i = 0; i < emptyStars; i++) {
-        stars += '<span class="rating-empty">★</span>';
+        stars += '<i class="far fa-star rating-empty"></i>';
     }
 
     return stars;

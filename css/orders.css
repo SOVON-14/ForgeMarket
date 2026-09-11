@@ -162,7 +162,9 @@
 }
 
 .order-artisan::before {
-    content: '👷';
+    content: '\f83c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
 }
 
 .order-status {
@@ -366,7 +368,9 @@
 }
 
 .order-warning::before {
-    content: '⚠';
+    content: '\f071';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
 }
 
 /* Empty State */

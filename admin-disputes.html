@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div id="app">
@@ -28,11 +29,15 @@
 
         <main class="container" style="padding: 5rem 0;">
             <h2>Gestion des litiges</h2>
-            <p>Cette page admin sera connectée à la liste des litiges.</p>
+            <p>Consultez les signalements et enregistrez les décisions de modération.</p>
+            <section id="disputesList" class="admin-list" aria-live="polite">
+                <p class="text-center">Chargement des litiges...</p>
+            </section>
         </main>
     </div>
 
     <script src="js/main.js"></script>
     <script src="js/navigation.js"></script>
+    <script src="js/admin-disputes.js"></script>
 </body>
 </html>

@@ -32,12 +32,10 @@ async function loadDashboardStats() {
         // const data = await response.json();
 
         // Mock data
-        const mockStats = {
-            totalUsers: 1250,
-            totalArtisans: 156,
-            totalOrders: 890,
-            totalRevenue: 2850000
-        };
+            const response = await fetch('/api/v1/admin-dashboard.php');
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || 'Statistiques indisponibles');
+            const mockStats = result.data.stats;
 
         // Animate numbers
         animateNumber('totalUsers', mockStats.totalUsers);
@@ -60,11 +58,10 @@ async function loadPendingArtisans() {
         // const data = await response.json();
 
         // Mock data
-        const mockArtisans = [
-            { id: 1, name: 'Kofi A.', specialty: 'Ferronnerie', submittedAt: '2024-01-18' },
-            { id: 2, name: 'Komlan M.', specialty: 'Soudure', submittedAt: '2024-01-17' },
-            { id: 3, name: 'Yawo K.', specialty: 'Construction métallique', submittedAt: '2024-01-16' }
-        ];
+            const response = await fetch('/api/v1/admin-dashboard.php');
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || 'Artisans indisponibles');
+            const mockArtisans = result.data.pendingArtisans;
 
         pendingArtisans.innerHTML = mockArtisans.map(artisan => `
             <div class="list-item">
@@ -96,17 +93,16 @@ async function loadRecentOrders() {
         // const data = await response.json();
 
         // Mock data
-        const mockOrders = [
-            { id: 'ORD-0890', client: 'Jean K.', artisan: 'Kofi A.', status: 'en_fabrication', amount: 150000 },
-            { id: 'ORD-0889', client: 'Marie A.', artisan: 'Komlan M.', status: 'finalisee', amount: 95000 },
-            { id: 'ORD-0888', client: 'Philippe M.', artisan: 'Yawo K.', status: 'en_livraison', amount: 200000 }
-        ];
+            const response = await fetch('/api/v1/admin-dashboard.php');
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || 'Commandes indisponibles');
+            const mockOrders = result.data.recentOrders;
 
         recentOrders.innerHTML = mockOrders.map(order => `
             <div class="list-item">
                 <div class="item-info">
-                    <div class="item-name">${order.id}</div>
-                    <div class="item-details">${order.client} → ${order.artisan}</div>
+                        <div class="item-name">Commande #${order.id}</div>
+                        <div class="item-details">${escapeHtml(order.client)} · ${escapeHtml(order.artisan)}</div>
                 </div>
                 <div class="item-actions">
                     <span class="badge badge-${getStatusBadgeClass(order.status)}">${order.status}</span>
@@ -131,10 +127,10 @@ async function loadActiveDisputes() {
         // const data = await response.json();
 
         // Mock data
-        const mockDisputes = [
-            { id: 'DSP-001', order: 'ORD-0875', client: 'Jean K.', artisan: 'Kofi A.', type: 'Retard', openedAt: '2024-01-15' },
-            { id: 'DSP-002', order: 'ORD-0870', client: 'Marie A.', artisan: 'Komlan M.', type: 'Qualité', openedAt: '2024-01-14' }
-        ];
+            const response = await fetch('/api/v1/admin-dashboard.php');
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || 'Litiges indisponibles');
+            const mockDisputes = result.data.activeDisputes;
 
         activeDisputes.innerHTML = mockDisputes.map(dispute => `
             <div class="list-item">
@@ -234,3 +230,5 @@ function getStatusBadgeClass(status) {
     };
     return statusMap[status] || 'secondary';
 }
+
+function escapeHtml(value) { return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' }[character])); }
