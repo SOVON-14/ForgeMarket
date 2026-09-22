@@ -28,22 +28,22 @@ async function loadArtisanProfile(artisanId) {
     const profileContent = document.getElementById('profileContent');
 
     try {
-        // Simulate API call - replace with actual API endpoint
-        // const response = await fetch(`/api/v1/artisans/${artisanId}`);
-        // const data = await response.json();
+        const response = await fetch(`/api/v1/artisans/show.php?id=${encodeURIComponent(artisanId)}`);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error || 'Profil introuvable');
+        }
 
-        // Mock data for demonstration
-        const mockArtisan = generateMockArtisanProfile(artisanId);
-        currentArtisan = mockArtisan;
+        currentArtisan = data.data;
 
         // Hide loading, show content
         loadingState.classList.add('hidden');
         profileContent.classList.remove('hidden');
 
         // Populate profile data
-        populateProfileData(mockArtisan);
-        loadPortfolio(mockArtisan.id);
-        loadReviews(mockArtisan.id);
+        populateProfileData(currentArtisan);
+        loadPortfolio(currentArtisan.id);
+        loadReviews(currentArtisan.id);
 
     } catch (error) {
         console.error('Error loading artisan profile:', error);
@@ -55,44 +55,6 @@ async function loadArtisanProfile(artisanId) {
             </div>
         `;
     }
-}
-
-// Generate Mock Artisan Profile Data
-function generateMockArtisanProfile(id) {
-    const specialties = ['Ferronnerie', 'Soudure', 'Construction métallique', 'Menuiserie métallique'];
-    const locations = ['Lomé', 'Sokodé', 'Kara', 'Atsapié', 'Tsévié'];
-    const names = ['Kofi A.', 'Komlan M.', 'Yawo K.', 'Afi B.', 'Kokou T.'];
-
-    const specialty = specialties[id % specialties.length];
-    const location = locations[id % locations.length];
-    const name = names[id % names.length];
-
-    return {
-        id: parseInt(id),
-        name: name,
-        specialty: specialty,
-        location: location,
-        rating: (4 + Math.random()).toFixed(1),
-        reviewCount: Math.floor(Math.random() * 50) + 10,
-        ordersCount: Math.floor(Math.random() * 100) + 20,
-        experienceYears: Math.floor(Math.random() * 15) + 3,
-        responseRate: Math.floor(Math.random() * 30) + 70,
-        verified: Math.random() > 0.3,
-        available: Math.random() > 0.3,
-        image: `https://via.placeholder.com/300x300/C2652A/FFFFFF?text=${encodeURIComponent(name)}`,
-        description: `Artisan expérimenté en ${specialty.toLowerCase()} avec plus de ${Math.floor(Math.random() * 15) + 3} ans d'expérience. Spécialisé dans les travaux sur mesure et la rénovation. Je m'engage à fournir un travail de qualité avec des matériaux durables.`,
-        skills: ['Soudure MIG/MAG', 'Découpe laser', 'Finition', 'Installation', 'Réparation', 'Conception sur mesure'],
-        services: [
-            'Fabrication de portails et clôtures',
-            'Construction de structures métalliques',
-            'Réparation et entretien',
-            'Travaux de ferronnerie d\'art',
-            'Menuiserie métallique',
-            'Installation et montage'
-        ],
-        verificationDate: '2023-06-15',
-        verificationDocuments: ['Carte d\'identité', 'Registre de commerce', 'Attestation de formation']
-    };
 }
 
 // Populate Profile Data
@@ -147,9 +109,9 @@ function populateProfileData(artisan) {
     const verificationInfo = document.getElementById('verificationInfo');
     if (artisan.verified) {
         verificationInfo.innerHTML = `
-            <p><strong>✓ Identité vérifiée</strong> - ${formatDate(artisan.verificationDate)}</p>
-            <p><strong>✓ Documents validés:</strong> ${artisan.verificationDocuments.join(', ')}</p>
-            <p><strong>✓ Artisan certifié</strong> par ForgeMarket</p>
+            <p><strong><i class="fas fa-check-circle"></i> Identité vérifiée</strong> - ${formatDate(artisan.verificationDate)}</p>
+            <p><strong><i class="fas fa-check-circle"></i> Documents validés:</strong> ${artisan.verificationDocuments.join(', ')}</p>
+            <p><strong><i class="fas fa-check-circle"></i> Artisan certifié</strong> par ForgeMarket</p>
         `;
     } else {
         verificationInfo.innerHTML = `
@@ -162,110 +124,13 @@ function populateProfileData(artisan) {
 // Load Portfolio
 function loadPortfolio(artisanId) {
     const portfolioGrid = document.getElementById('portfolioGrid');
-
-    // Mock portfolio data
-    const mockPortfolio = [
-        {
-            id: 1,
-            title: 'Portail moderne',
-            description: 'Portail en fer forgé avec design contemporain',
-            image: 'https://via.placeholder.com/300x200/C2652A/FFFFFF?text=Portail',
-            date: '2024-01-15'
-        },
-        {
-            id: 2,
-            title: 'Structure métallique',
-            description: 'Charpente pour hangar industriel',
-            image: 'https://via.placeholder.com/300x200/8C3C3C/FFFFFF?text=Structure',
-            date: '2024-01-10'
-        },
-        {
-            id: 3,
-            title: 'Escalier métallique',
-            description: 'Escalier sur mesure avec finition époxy',
-            image: 'https://via.placeholder.com/300x200/82746E/FFFFFF?text=Escalier',
-            date: '2023-12-20'
-        },
-        {
-            id: 4,
-            title: 'Clôture décorative',
-            description: 'Clôture avec motifs artistiques',
-            image: 'https://via.placeholder.com/300x200/C2652A/FFFFFF?text=Clôture',
-            date: '2023-12-15'
-        },
-        {
-            id: 5,
-            title: 'Meuble métallique',
-            description: 'Table basse en métal et bois',
-            image: 'https://via.placeholder.com/300x200/8C3C3C/FFFFFF?text=Meuble',
-            date: '2023-11-30'
-        },
-        {
-            id: 6,
-            title: 'Rénovation toiture',
-            description: 'Remplacement complet de toiture métallique',
-            image: 'https://via.placeholder.com/300x200/82746E/FFFFFF?text=Toiture',
-            date: '2023-11-15'
-        }
-    ];
-
-    portfolioGrid.innerHTML = mockPortfolio.map(item => `
-        <div class="portfolio-item" onclick="viewPortfolioItem(${item.id})">
-            <img src="${item.image}" alt="${item.title}" class="portfolio-image">
-            <div class="portfolio-info">
-                <h4 class="portfolio-title">${item.title}</h4>
-                <p class="portfolio-description">${item.description}</p>
-                <p class="portfolio-date">${formatDate(item.date)}</p>
-            </div>
-        </div>
-    `).join('');
+    portfolioGrid.innerHTML = '<p class="empty-state">Aucune réalisation publiée pour le moment.</p>';
 }
 
 // Load Reviews
 function loadReviews(artisanId) {
     const reviewsList = document.getElementById('reviewsList');
-
-    // Mock reviews data
-    const mockReviews = [
-        {
-            id: 1,
-            author: 'Jean K.',
-            rating: 5,
-            date: '2024-01-20',
-            text: 'Excellent travail ! L\'artisan a respecté les délais et la qualité est au rendez-vous. Je recommande vivement.',
-            verified: true
-        },
-        {
-            id: 2,
-            author: 'Marie A.',
-            rating: 4,
-            date: '2024-01-15',
-            text: 'Très professionnel et à l\'écoute. Le rendu final est conforme à mes attentes. Petit retard sur la livraison mais compensé par la qualité.',
-            verified: true
-        },
-        {
-            id: 3,
-            author: 'Philippe M.',
-            rating: 5,
-            date: '2024-01-10',
-            text: 'Service impeccable du début à la fin. Communication fluide et travail soigné. C\'est mon deuxième commande avec cet artisan.',
-            verified: true
-        }
-    ];
-
-    reviewsList.innerHTML = mockReviews.map(review => `
-        <div class="review-item">
-            <div class="review-header">
-                <div>
-                    <span class="review-author">${review.author}</span>
-                    ${review.verified ? '<span class="review-verified">Achat vérifié</span>' : ''}
-                </div>
-                <span class="review-date">${formatDate(review.date)}</span>
-            </div>
-            <div class="review-rating">${generateRatingStars(review.rating)}</div>
-            <p class="review-text">${review.text}</p>
-        </div>
-    `).join('');
+    reviewsList.innerHTML = '<p class="empty-state">Aucun avis publié pour le moment.</p>';
 }
 
 // Initialize Tabs
@@ -352,7 +217,7 @@ function toggleFavorite() {
 function updateFavoriteButton() {
     const favoriteButton = document.getElementById('favoriteButton');
     if (favoriteButton) {
-        favoriteButton.textContent = isFavorite ? '★ Retirer des favoris' : '☆ Ajouter aux favoris';
+        favoriteButton.textContent = isFavorite ? '<i class="fas fa-star"></i> Retirer des favoris' : '<i class="far fa-star"></i> Ajouter aux favoris';
         favoriteButton.classList.toggle('btn-primary', isFavorite);
         favoriteButton.classList.toggle('btn-outline', !isFavorite);
     }
@@ -374,13 +239,13 @@ function generateRatingStars(rating) {
 
     let stars = '';
     for (let i = 0; i < fullStars; i++) {
-        stars += '★';
+        stars += '<i class="fas fa-star"></i>';
     }
     if (hasHalfStar) {
-        stars += '½';
+        stars += '<i class="fas fa-star-half-alt"></i>';
     }
     for (let i = 0; i < emptyStars; i++) {
-        stars += '<span class="rating-empty">★</span>';
+        stars += '<i class="far fa-star rating-empty"></i>';
     }
 
     return stars;

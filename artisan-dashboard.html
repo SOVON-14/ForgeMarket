@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace artisan - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar"><div class="container"><div class="nav-brand"><a href="index.html"><h1>ForgeMarket</h1></a></div><ul class="nav-menu"><li><a href="artisans.html">Artisans</a></li><li><a href="messages.html">Messages</a></li><li class="nav-auth"><button onclick="logout()" class="btn btn-primary">Déconnexion</button></li></ul></div></nav>
+        <main class="dashboard-page"><div class="container">
+            <div class="welcome-section"><h1>Espace artisan</h1><p id="profileStatus">Chargement de votre profil...</p></div>
+            <div class="quick-stats"><div class="stat-card"><div class="stat-info"><h3>Commandes</h3><p class="stat-number" id="ordersCount">0</p></div></div><div class="stat-card"><div class="stat-info"><h3>Note moyenne</h3><p class="stat-number" id="rating">0/5</p></div></div><div class="stat-card"><div class="stat-info"><h3>Avis reçus</h3><p class="stat-number" id="reviews">0</p></div></div></div>
+            <div class="dashboard-grid"><section class="dashboard-card"><div class="card-header"><h2>Mes commandes</h2></div><div class="card-body" id="artisanOrders"><p class="text-center">Chargement...</p></div></section>
+            <section class="dashboard-card"><div class="card-header"><h2>Mon profil professionnel</h2></div><div class="card-body"><form id="artisanProfileForm"><div class="form-group"><label class="form-label" for="businessName">Nom professionnel</label><input class="form-input" id="businessName" name="businessName" required maxlength="150"></div><div class="form-group"><label class="form-label" for="category">Catégorie</label><select class="form-select" id="category" name="category" required><option value="ferronnerie">Ferronnerie</option><option value="soudure">Soudure</option><option value="construction_metallique">Construction métallique</option><option value="menuiserie_metal">Menuiserie métallique</option></select></div><div class="form-group"><label class="form-label" for="city">Ville</label><select class="form-select" id="city" name="city" required><option value="lome">Lomé</option><option value="sokode">Sokodé</option><option value="kara">Kara</option><option value="atsapie">Atsapié</option><option value="tsevie">Tsévié</option></select></div><div class="form-group"><label class="form-label" for="address">Adresse</label><input class="form-input" id="address" name="address" required maxlength="255"></div><div class="form-group"><label class="form-label" for="yearsExperience">Années d’expérience</label><input class="form-input" type="number" id="yearsExperience" name="yearsExperience" min="0" max="80" required></div><div class="form-group"><label class="form-label" for="bio">Présentation</label><textarea class="form-textarea" id="bio" name="bio" required maxlength="5000"></textarea></div><div class="form-group form-checkbox"><input type="checkbox" id="isAvailable" name="isAvailable"><label for="isAvailable">Disponible pour de nouvelles commandes</label></div><button class="btn btn-primary" type="submit">Enregistrer le profil</button></form></div></section></div>
+        </div></main>
+        <footer class="footer">
+            <!-- Top Footer - CTA Section -->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="footer-top-content">
+                        <h2>Rejoignez la communauté ForgeMarket</h2>
+                        <p>Connectez-vous avec les meilleurs artisans et forgerons du Togo pour vos projets métalliques.</p>
+                    </div>
+                    <div class="footer-top-cta">
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> S'inscrire gratuitement
+                        </a>
+                        <a href="artisans.html" class="btn btn-secondary">
+                            <i class="fas fa-search"></i> Trouver un artisan
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footer - Information Section -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <i class="fas fa-fire"></i> ForgeMarket
+                        </a>
+                        <p>La plateforme de référence pour connecter clients et artisans au Togo. Trouvez des professionnels vérifiés pour tous vos projets métalliques.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="artisans.html">Artisans</a></li>
+                            <li><a href="catalogue.html">Catalogue</a></li>
+                            <li><a href="create-quote.html">Demander un devis</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Informations</h3>
+                        <ul>
+                            <li><a href="about.html">À propos</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="cgu.html">CGU</a></li>
+                            <li><a href="cgv.html">CGV</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Légal</h3>
+                        <ul>
+                            <li><a href="privacy.html">Politique de confidentialité</a></li>
+                            <li><a href="cgu.html">Conditions d'utilisation</a></li>
+                            <li><a href="cgv.html">Conditions de vente</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom-bar">
+                <div class="container">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="privacy.html">Confidentialité</a>
+                        <a href="cgu.html">CGU</a>
+                        <a href="cgv.html">CGV</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div><script src="js/main.js"></script><script src="js/navigation.js"></script><script src="js/artisan-dashboard.js"></script><script src="js/notifications.js"></script>
+</body>
+</html>

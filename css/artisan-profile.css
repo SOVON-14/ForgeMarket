@@ -63,7 +63,9 @@
 }
 
 .location::before {
-    content: '📍';
+    content: '\f3c5';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
 }
 
 /* Rating */
@@ -247,9 +249,10 @@
 }
 
 .service-item::before {
-    content: '✓';
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
     color: var(--success);
-    font-weight: bold;
 }
 
 .verification-info {
@@ -375,7 +378,9 @@
 }
 
 .review-verified::before {
-    content: '✓';
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
 }
 
 /* Empty States */

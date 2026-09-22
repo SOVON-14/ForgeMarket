@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue - ForgeMarket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/catalog.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#C2652A">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="catalogue.html" class="active">Catalogue</a></li>
+                    <li><a href="create-quote.html">Devis</a></li>
+                    <li><a href="cart.html" class="nav-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <li class="nav-auth">
+                        <a href="login.html" class="btn btn-outline">Connexion</a>
+                        <a href="register.html" class="btn btn-primary">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <div class="container">
+                <div class="catalog-header">
+                    <h1><i class="fas fa-shopping-bag"></i> Catalogue de Produits</h1>
+                    <p>Découvrez les produits de nos artisans vérifiés</p>
+                </div>
+
+                <div class="catalog-layout">
+                <aside class="catalog-filters">
+                    <div class="filter-section">
+                        <h3><i class="fas fa-filter"></i> Filtres</h3>
+
+                        <div class="filter-group">
+                            <label>Recherche</label>
+                            <input type="text" id="searchInput" placeholder="Rechercher un produit...">
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Catégorie</label>
+                            <select id="categoryFilter">
+                                <option value="">Toutes les catégories</option>
+                                <option value="1">Portails</option>
+                                <option value="2">Clôtures</option>
+                                <option value="3">Structures</option>
+                                <option value="4">Mobilier</option>
+                                <option value="5">Décoration</option>
+                                <option value="6">Réparation</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Artisan</label>
+                            <select id="artisanFilter">
+                                <option value="">Tous les artisans</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Trier par</label>
+                            <select id="sortFilter">
+                                <option value="created_at">Plus récents</option>
+                                <option value="price_asc">Prix croissant</option>
+                                <option value="price_desc">Prix décroissant</option>
+                                <option value="views_count">Plus vus</option>
+                                <option value="orders_count">Plus vendus</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="applyFilters()">
+                            <i class="fas fa-search"></i> Appliquer
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetFilters()">
+                            <i class="fas fa-undo"></i> Réinitialiser
+                        </button>
+                    </div>
+                </aside>
+
+                <div class="catalog-content">
+                    <div class="catalog-toolbar">
+                        <div class="results-info">
+                            <span id="resultsCount">0</span> produits trouvés
+                        </div>
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="grid">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="products-grid" id="productsGrid">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i> Chargement...
+                        </div>
+                    </div>
+
+                    <div class="pagination" id="pagination">
+                        <button class="page-btn" id="prevPage" disabled>
+                            <i class="fas fa-chevron-left"></i> Précédent
+                        </button>
+                        <span class="page-info" id="pageInfo">Page 1</span>
+                        <button class="page-btn" id="nextPage">
+                            Suivant <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- Top Footer - CTA Section -->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="footer-top-content">
+                        <h2>Rejoignez la communauté ForgeMarket</h2>
+                        <p>Connectez-vous avec les meilleurs artisans et forgerons du Togo pour vos projets métalliques.</p>
+                    </div>
+                    <div class="footer-top-cta">
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> S'inscrire gratuitement
+                        </a>
+                        <a href="artisans.html" class="btn btn-secondary">
+                            <i class="fas fa-search"></i> Trouver un artisan
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footer - Information Section -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <i class="fas fa-fire"></i> ForgeMarket
+                        </a>
+                        <p>La plateforme de référence pour connecter clients et artisans au Togo. Trouvez des professionnels vérifiés pour tous vos projets métalliques.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="artisans.html">Artisans</a></li>
+                            <li><a href="catalogue.html">Catalogue</a></li>
+                            <li><a href="create-quote.html">Demander un devis</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Informations</h3>
+                        <ul>
+                            <li><a href="about.html">À propos</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="cgu.html">CGU</a></li>
+                            <li><a href="cgv.html">CGV</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Légal</h3>
+                        <ul>
+                            <li><a href="privacy.html">Politique de confidentialité</a></li>
+                            <li><a href="cgu.html">Conditions d'utilisation</a></li>
+                            <li><a href="cgv.html">Conditions de vente</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom-bar">
+                <div class="container">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="privacy.html">Confidentialité</a>
+                        <a href="cgu.html">CGU</a>
+                        <a href="cgv.html">CGV</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/catalog.js"></script>
+</body>
+</html>

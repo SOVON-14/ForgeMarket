@@ -119,8 +119,10 @@
 }
 
 .auth-info li::before {
-    content: '✓ ';
-    font-weight: bold;
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-right: 0.5rem;
 }
 
 /* Role Selection */

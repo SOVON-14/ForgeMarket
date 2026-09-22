@@ -27,23 +27,16 @@ function checkAdminAccess() {
 // Load Dashboard Stats
 async function loadDashboardStats() {
     try {
-        // Simulate API call
-        // const response = await fetch('/api/v1/admin/stats');
-        // const data = await response.json();
-
-        // Mock data
-        const mockStats = {
-            totalUsers: 1250,
-            totalArtisans: 156,
-            totalOrders: 890,
-            totalRevenue: 2850000
-        };
+        const response = await fetch('/api/v1/admin-dashboard.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Statistiques indisponibles');
+        const stats = result.data.stats;
 
         // Animate numbers
-        animateNumber('totalUsers', mockStats.totalUsers);
-        animateNumber('totalArtisans', mockStats.totalArtisans);
-        animateNumber('totalOrders', mockStats.totalOrders);
-        document.getElementById('totalRevenue').textContent = formatCurrency(mockStats.totalRevenue);
+        animateNumber('totalUsers', stats.totalUsers);
+        animateNumber('totalArtisans', stats.totalArtisans);
+        animateNumber('totalOrders', stats.totalOrders);
+        document.getElementById('totalRevenue').textContent = formatCurrency(stats.totalRevenue);
 
     } catch (error) {
         console.error('Error loading stats:', error);
@@ -55,23 +48,17 @@ async function loadPendingArtisans() {
     const pendingArtisans = document.getElementById('pendingArtisans');
 
     try {
-        // Simulate API call
-        // const response = await fetch('/api/v1/admin/artisans/pending');
-        // const data = await response.json();
+        const response = await fetch('/api/v1/admin-dashboard.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Artisans indisponibles');
+        const artisans = result.data.pendingArtisans;
 
-        // Mock data
-        const mockArtisans = [
-            { id: 1, name: 'Kofi A.', specialty: 'Ferronnerie', submittedAt: '2024-01-18' },
-            { id: 2, name: 'Komlan M.', specialty: 'Soudure', submittedAt: '2024-01-17' },
-            { id: 3, name: 'Yawo K.', specialty: 'Construction métallique', submittedAt: '2024-01-16' }
-        ];
-
-        pendingArtisans.innerHTML = mockArtisans.map(artisan => `
+        pendingArtisans.innerHTML = artisans.map(artisan => `
             <div class="list-item">
-                <img src="https://via.placeholder.com/40/C2652A/FFFFFF?text=${artisan.name[0]}" alt="${artisan.name}" class="item-avatar">
+                <img src="https://via.placeholder.com/40/C2652A/FFFFFF?text=${encodeURIComponent(artisan.name[0])}" alt="${escapeHtml(artisan.name)}" class="item-avatar">
                 <div class="item-info">
-                    <div class="item-name">${artisan.name}</div>
-                    <div class="item-details">${artisan.specialty} • Soumis le ${formatDate(artisan.submittedAt)}</div>
+                    <div class="item-name">${escapeHtml(artisan.name)}</div>
+                    <div class="item-details">${escapeHtml(artisan.specialty)} · Soumis le ${formatDate(artisan.submitted_at)}</div>
                 </div>
                 <div class="item-actions">
                     <button class="btn btn-primary btn-small" onclick="approveArtisan(${artisan.id})">Approuver</button>
@@ -91,22 +78,16 @@ async function loadRecentOrders() {
     const recentOrders = document.getElementById('recentOrders');
 
     try {
-        // Simulate API call
-        // const response = await fetch('/api/v1/admin/orders/recent');
-        // const data = await response.json();
+        const response = await fetch('/api/v1/admin-dashboard.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Commandes indisponibles');
+        const orders = result.data.recentOrders;
 
-        // Mock data
-        const mockOrders = [
-            { id: 'ORD-0890', client: 'Jean K.', artisan: 'Kofi A.', status: 'en_fabrication', amount: 150000 },
-            { id: 'ORD-0889', client: 'Marie A.', artisan: 'Komlan M.', status: 'finalisee', amount: 95000 },
-            { id: 'ORD-0888', client: 'Philippe M.', artisan: 'Yawo K.', status: 'en_livraison', amount: 200000 }
-        ];
-
-        recentOrders.innerHTML = mockOrders.map(order => `
+        recentOrders.innerHTML = orders.map(order => `
             <div class="list-item">
                 <div class="item-info">
-                    <div class="item-name">${order.id}</div>
-                    <div class="item-details">${order.client} → ${order.artisan}</div>
+                    <div class="item-name">Commande #${order.id}</div>
+                    <div class="item-details">${escapeHtml(order.client)} · ${escapeHtml(order.artisan)}</div>
                 </div>
                 <div class="item-actions">
                     <span class="badge badge-${getStatusBadgeClass(order.status)}">${order.status}</span>
@@ -126,21 +107,16 @@ async function loadActiveDisputes() {
     const activeDisputes = document.getElementById('activeDisputes');
 
     try {
-        // Simulate API call
-        // const response = await fetch('/api/v1/admin/disputes/active');
-        // const data = await response.json();
+        const response = await fetch('/api/v1/admin-dashboard.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Litiges indisponibles');
+        const disputes = result.data.activeDisputes;
 
-        // Mock data
-        const mockDisputes = [
-            { id: 'DSP-001', order: 'ORD-0875', client: 'Jean K.', artisan: 'Kofi A.', type: 'Retard', openedAt: '2024-01-15' },
-            { id: 'DSP-002', order: 'ORD-0870', client: 'Marie A.', artisan: 'Komlan M.', type: 'Qualité', openedAt: '2024-01-14' }
-        ];
-
-        activeDisputes.innerHTML = mockDisputes.map(dispute => `
+        activeDisputes.innerHTML = disputes.map(dispute => `
             <div class="list-item">
                 <div class="item-info">
-                    <div class="item-name">${dispute.id} - ${dispute.type}</div>
-                    <div class="item-details">${dispute.order} • ${dispute.client} vs ${dispute.artisan}</div>
+                    <div class="item-name">Litige #${dispute.id} - ${escapeHtml(dispute.type)}</div>
+                    <div class="item-details">Commande #${dispute.order} · ${escapeHtml(dispute.client)} vs ${escapeHtml(dispute.artisan)}</div>
                 </div>
                 <div class="item-actions">
                     <button class="btn btn-primary btn-small" onclick="handleDispute('${dispute.id}')">Gérer</button>
@@ -233,4 +209,10 @@ function getStatusBadgeClass(status) {
         'annulee': 'error'
     };
     return statusMap[status] || 'secondary';
+}
+
+function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>'"]/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;'
+    }[character]));
 }

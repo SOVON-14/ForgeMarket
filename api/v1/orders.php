@@ -1,0 +1,75 @@
+<?php
+
+declare(strict_types=1);
+
+session_start();
+header('Content-Type: application/json; charset=utf-8');
+require_once __DIR__ . '/../../../config/database.php';
+
+$userId = (int) ($_SESSION['user_id'] ?? 0);
+if ($userId < 1) { http_response_code(401); echo json_encode(['error' => 'Authentification requise.']); exit; }
+
+try {
+    $user = $pdo->prepare('SELECT role FROM users WHERE id = :id AND is_active = 1 LIMIT 1');
+    $user->execute(['id' => $userId]);
+    $role = $user->fetchColumn();
+    if (!in_array($role, ['client', 'artisan'], true)) { http_response_code(403); echo json_encode(['error' => 'Accès interdit.']); exit; }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $input = json_decode(file_get_contents('php://input'), true);
+        $orderId = filter_var($input['orderId'] ?? null, FILTER_VALIDATE_INT);
+        $action = $input['action'] ?? '';
+
+        if (!$orderId || !in_array($action, ['cancel', 'accept', 'start', 'complete'], true)) {
+            http_response_code(422);
+            echo json_encode(['error' => 'Action de commande invalide.']);
+            exit;
+        }
+
+        $ownership = $role === 'client'
+            ? 'o.client_id = :user_id'
+            : 'ap.user_id = :user_id';
+        $orderStatement = $pdo->prepare("SELECT o.id, o.status FROM orders o INNER JOIN artisan_profiles ap ON ap.id = o.artisan_id WHERE o.id = :order_id AND $ownership LIMIT 1");
+        $orderStatement->execute(['order_id' => $orderId, 'user_id' => $userId]);
+        $order = $orderStatement->fetch();
+
+        if (!$order) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Commande introuvable.']);
+            exit;
+        }
+
+        $transitions = [
+            'cancel' => ['role' => 'client', 'from' => ['pending'], 'to' => 'cancelled'],
+            'accept' => ['role' => 'artisan', 'from' => ['pending'], 'to' => 'accepted'],
+            'start' => ['role' => 'artisan', 'from' => ['accepted'], 'to' => 'in_progress'],
+            'complete' => ['role' => 'artisan', 'from' => ['in_progress'], 'to' => 'completed'],
+        ];
+        $transition = $transitions[$action];
+
+        if ($role !== $transition['role'] || !in_array($order['status'], $transition['from'], true)) {
+            http_response_code(409);
+            echo json_encode(['error' => 'Cette transition n’est pas autorisée.']);
+            exit;
+        }
+
+        $statement = $pdo->prepare('UPDATE orders SET status = :status, completed_at = :completed_at, updated_at = NOW() WHERE id = :id');
+        $statement->execute([
+            'status' => $transition['to'],
+            'completed_at' => $transition['to'] === 'completed' ? date('Y-m-d H:i:s') : null,
+            'id' => $orderId,
+        ]);
+
+        echo json_encode(['success' => true, 'message' => 'Commande mise à jour.']);
+        exit;
+    }
+
+    $condition = $role === 'client' ? 'o.client_id = :user_id' : 'ap.user_id = :user_id';
+    $statement = $pdo->prepare("SELECT o.id, o.title, o.description, o.amount, o.delivery_address, o.expected_date, o.status, o.created_at, o.completed_at, CONCAT(c.first_name, ' ', c.last_name) AS client_name, CONCAT(a.first_name, ' ', a.last_name) AS artisan_name, ap.id AS artisan_id FROM orders o INNER JOIN users c ON c.id = o.client_id INNER JOIN artisan_profiles ap ON ap.id = o.artisan_id INNER JOIN users a ON a.id = ap.user_id WHERE $condition ORDER BY o.created_at DESC");
+    $statement->execute(['user_id' => $userId]);
+    $orders = array_map(static function (array $order): array {
+        $statusMap = ['pending' => 'en_attente', 'accepted' => 'confirmee', 'in_progress' => 'en_fabrication', 'completed' => 'finalisee', 'cancelled' => 'annulee', 'disputed' => 'en_litige'];
+        return ['id' => (int) $order['id'], 'title' => $order['title'], 'description' => $order['description'], 'artisan' => $order['artisan_name'], 'client' => $order['client_name'], 'artisanId' => (int) $order['artisan_id'], 'status' => $statusMap[$order['status']] ?? $order['status'], 'price' => (float) $order['amount'], 'createdAt' => $order['created_at'], 'expectedDelivery' => $order['expected_date'], 'actualDelivery' => $order['completed_at'], 'address' => $order['delivery_address'], 'isDelayed' => false];
+    }, $statement->fetchAll());
+    echo json_encode(['success' => true, 'data' => $orders]);
+} catch (PDOException $exception) { http_response_code(500); echo json_encode(['error' => 'Impossible de charger les commandes.']); }

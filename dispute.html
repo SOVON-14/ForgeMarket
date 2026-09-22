@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signaler un problème - ForgeMarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/orders.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand"><a href="index.html"><h1>ForgeMarket</h1></a></div>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Tableau de bord</a></li>
+                    <li><a href="orders.html">Commandes</a></li>
+                    <li class="nav-auth"><button onclick="logout()" class="btn btn-primary">Déconnexion</button></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="container" style="padding: 5rem 0; max-width: 760px;">
+            <div class="page-header">
+                <h1>Signaler un problème</h1>
+                <p>Décrivez la situation afin que notre équipe puisse examiner votre commande.</p>
+            </div>
+            <form id="disputeForm" class="auth-card">
+                <div class="form-group">
+                    <label for="reason" class="form-label">Motif</label>
+                    <input id="reason" name="reason" class="form-input" required maxlength="255" placeholder="Ex : retard, qualité non conforme">
+                </div>
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" name="description" class="form-textarea" required minlength="10" placeholder="Expliquez précisément le problème rencontré."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large">Ouvrir le litige</button>
+                    <a href="orders.html" class="btn btn-outline btn-large">Annuler</a>
+                </div>
+            </form>
+        </main>
+
+        <footer class="footer">
+            <!-- Top Footer - CTA Section -->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="footer-top-content">
+                        <h2>Rejoignez la communauté ForgeMarket</h2>
+                        <p>Connectez-vous avec les meilleurs artisans et forgerons du Togo pour vos projets métalliques.</p>
+                    </div>
+                    <div class="footer-top-cta">
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> S'inscrire gratuitement
+                        </a>
+                        <a href="artisans.html" class="btn btn-secondary">
+                            <i class="fas fa-search"></i> Trouver un artisan
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footer - Information Section -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <i class="fas fa-fire"></i> ForgeMarket
+                        </a>
+                        <p>La plateforme de référence pour connecter clients et artisans au Togo. Trouvez des professionnels vérifiés pour tous vos projets métalliques.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="artisans.html">Artisans</a></li>
+                            <li><a href="catalogue.html">Catalogue</a></li>
+                            <li><a href="create-quote.html">Demander un devis</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Informations</h3>
+                        <ul>
+                            <li><a href="about.html">À propos</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="cgu.html">CGU</a></li>
+                            <li><a href="cgv.html">CGV</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Légal</h3>
+                        <ul>
+                            <li><a href="privacy.html">Politique de confidentialité</a></li>
+                            <li><a href="cgu.html">Conditions d'utilisation</a></li>
+                            <li><a href="cgv.html">Conditions de vente</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom-bar">
+                <div class="container">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="privacy.html">Confidentialité</a>
+                        <a href="cgu.html">CGU</a>
+                        <a href="cgv.html">CGV</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/dispute.js"></script>
+</body>
+</html>

@@ -40,13 +40,12 @@ function toggleNavigation() {
 
 function highlightCurrentPage() {
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.nav-menu a');
+    const navLinks = document.querySelectorAll('.nav-menu a, .header-nav a');
 
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href');
         if (linkPath === currentPath) {
-            link.style.color = 'var(--primary-color)';
-            link.style.fontWeight = '600';
+            link.classList.add('active');
         }
     });
 }

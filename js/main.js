@@ -75,6 +75,7 @@ function updateUIForAuthenticatedUser() {
 function checkAuthentication() {
     const protectedRoutes = [
         'dashboard.html',
+        'artisan-dashboard.html',
         'orders.html',
         'messages.html',
         'review.html',
@@ -94,7 +95,12 @@ function checkAuthentication() {
     }
 
     if ((currentPath === 'login.html' || currentPath === 'register.html') && AppState.isAuthenticated) {
-        window.location.href = 'dashboard.html';
+        const targetPage = AppState.currentUser.role === 'admin'
+            ? 'admin-dashboard.html'
+            : AppState.currentUser.role === 'artisan'
+                ? 'artisan-dashboard.html'
+                : 'dashboard.html';
+        window.location.href = targetPage;
     }
 }
 

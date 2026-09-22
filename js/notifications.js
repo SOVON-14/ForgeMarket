@@ -1,0 +1,29 @@
+document.addEventListener('DOMContentLoaded', loadNotifications);
+
+async function loadNotifications() {
+    const target = document.querySelector('.welcome-section');
+    if (!target) return;
+    const panel = document.createElement('section');
+    panel.className = 'dashboard-card notification-panel';
+    panel.innerHTML = '<div class="card-header"><h2>Notifications</h2></div><div class="card-body" id="notificationsList"><p class="text-center">Chargement...</p></div>';
+    target.insertAdjacentElement('afterend', panel);
+    try {
+        const response = await fetch('/api/v1/notifications.php');
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Notifications indisponibles');
+        const notifications = result.data || [];
+        document.getElementById('notificationsList').innerHTML = notifications.length ? notifications.map(renderNotification).join('') : '<p class="text-center">Aucune notification.</p>';
+    } catch (error) { document.getElementById('notificationsList').innerHTML = `<p class="text-center">${escapeHtml(error.message)}</p>`; }
+}
+
+function renderNotification(notification) {
+    const unread = notification.read_at ? '' : ' unread';
+    return `<article class="list-item${unread}"><div class="item-info"><div class="item-name">${escapeHtml(notification.title)}</div><div class="item-details">${escapeHtml(notification.message)}</div></div>${notification.read_at ? '' : `<button class="btn btn-outline btn-small" onclick="markNotificationRead(${notification.id}, this)">Marquer lu</button>`}</article>`;
+}
+
+async function markNotificationRead(notificationId, button) {
+    const response = await fetch('/api/v1/notifications.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ notificationId }) });
+    if (response.ok) { button.closest('.list-item').classList.remove('unread'); button.remove(); }
+}
+
+function escapeHtml(value) { return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' }[character])); }

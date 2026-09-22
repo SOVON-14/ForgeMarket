@@ -23,13 +23,13 @@ async function loadArtisans() {
     const resultsCount = document.getElementById('resultsCount');
 
     try {
-        // Simulate API call - replace with actual API endpoint
-        // const response = await fetch('/api/v1/artisans');
-        // const data = await response.json();
+        const response = await fetch('/api/v1/artisans/index.php');
+        if (!response.ok) {
+            throw new Error('Artisans API request failed');
+        }
 
-        // Mock data for demonstration
-        const mockArtisans = generateMockArtisans();
-        allArtisans = mockArtisans;
+        const data = await response.json();
+        allArtisans = data.data || [];
         filteredArtisans = [...allArtisans];
 
         displayArtisans(filteredArtisans);
@@ -44,27 +44,6 @@ async function loadArtisans() {
             </div>
         `;
     }
-}
-
-// Generate Mock Artisans Data
-function generateMockArtisans() {
-    const specialties = ['Ferronnerie', 'Soudure', 'Construction métallique', 'Menuiserie métallique'];
-    const locations = ['Lomé', 'Sokodé', 'Kara', 'Atsapié', 'Tsévié'];
-    const names = ['Kofi A.', 'Komlan M.', 'Yawo K.', 'Afi B.', 'Kokou T.', 'Sena D.', 'Mawuli P.', 'Agbé K.', 'Efoé Y.'];
-
-    return Array.from({ length: 24 }, (_, i) => ({
-        id: i + 1,
-        name: names[i % names.length],
-        specialty: specialties[i % specialties.length],
-        location: locations[i % locations.length],
-        rating: (3 + Math.random() * 2).toFixed(1),
-        reviewCount: Math.floor(Math.random() * 50) + 5,
-        ordersCount: Math.floor(Math.random() * 100) + 10,
-        verified: Math.random() > 0.3,
-        available: Math.random() > 0.4,
-        image: `https://via.placeholder.com/300x200/C2652A/FFFFFF?text=Artisan+${i + 1}`,
-        description: 'Artisan expérimenté spécialisé dans les travaux de forge et soudure de qualité.'
-    }));
 }
 
 // Display Artisans
@@ -142,13 +121,13 @@ function generateRatingStars(rating) {
 
     let stars = '';
     for (let i = 0; i < fullStars; i++) {
-        stars += '★';
+        stars += '<i class="fas fa-star"></i>';
     }
     if (hasHalfStar) {
-        stars += '½';
+        stars += '<i class="fas fa-star-half-alt"></i>';
     }
     for (let i = 0; i < emptyStars; i++) {
-        stars += '<span class="rating-empty">★</span>';
+        stars += '<i class="far fa-star rating-empty"></i>';
     }
 
     return stars;

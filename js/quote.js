@@ -83,21 +83,13 @@ async function initializeArtisanSelect() {
     const artisanSelect = document.getElementById('artisanSelect');
 
     try {
-        // Simulate API call - replace with actual API endpoint
-        // const response = await fetch('/api/v1/artisans');
-        // const artisans = await response.json();
-
-        // Mock data
-        const mockArtisans = [
-            { id: 1, name: 'Kofi A.', specialty: 'Ferronnerie' },
-            { id: 2, name: 'Komlan M.', specialty: 'Soudure' },
-            { id: 3, name: 'Yawo K.', specialty: 'Construction métallique' },
-            { id: 4, name: 'Afi B.', specialty: 'Menuiserie métallique' },
-            { id: 5, name: 'Kokou T.', specialty: 'Ferronnerie' }
-        ];
+        const response = await fetch('/api/v1/artisans/index.php');
+        const responseData = await response.json();
+        if (!response.ok) throw new Error(responseData.error || 'Artisans indisponibles');
+        const artisans = responseData.data || [];
 
         artisanSelect.innerHTML = '<option value="">Sélectionnez un artisan</option>' +
-            mockArtisans.map(artisan =>
+            artisans.map(artisan =>
                 `<option value="${artisan.id}">${artisan.name} - ${artisan.specialty}</option>`
             ).join('');
 
@@ -144,14 +136,13 @@ function initializeForm() {
             };
 
             try {
-                // Simulate API call
-                // const response = await fetch('/api/v1/quotes', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify(quoteData)
-                // });
-
-                console.log('Quote data:', quoteData);
+                const response = await fetch('/api/v1/quotes.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(quoteData)
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.error || 'Demande impossible');
 
                 // Show success message
                 alert('Demande de devis envoyée avec succès ! Vous recevrez les propositions des artisans.');
@@ -219,7 +210,7 @@ function stopRecording() {
         // Update UI
         document.getElementById('recordButton').classList.remove('hidden');
         document.getElementById('stopButton').classList.add('hidden');
-        document.getElementById('recordingStatus').textContent = 'Message vocal enregistré ✓';
+        document.getElementById('recordingStatus').textContent = 'Message vocal enregistré <i class="fas fa-check"></i>';
     }
 }
 

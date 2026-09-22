@@ -8,6 +8,19 @@
         padding: 0 15px;
     }
 
+    /* Typography optimization for mobile */
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+
     /* Navigation */
     .nav-toggle {
         display: flex;
@@ -204,6 +217,54 @@
 /* Extra Large Devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     /* All default styles apply */
+}
+
+/* Footer Responsive */
+@media (max-width: 992px) {
+    .footer-bottom .container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-top .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-top-cta {
+        align-items: center;
+    }
+
+    .footer-bottom .container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+        text-align: center;
+    }
+
+    .footer-brand .logo {
+        justify-content: center;
+    }
+
+    .footer-brand .social-links {
+        justify-content: center;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .footer-bottom-bar .container {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .footer-bottom-bar .legal-links {
+        justify-content: center;
+    }
 }
 
 /* Print Styles */

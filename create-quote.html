@@ -44,7 +44,7 @@
                 <!-- Access Denied Message -->
                 <div id="accessDenied" class="access-denied hidden">
                     <div class="access-denied-card">
-                        <h2>⚠ Accès limité</h2>
+                        <h2><i class="fas fa-exclamation-triangle"></i> Accès limité</h2>
                         <p>La fonctionnalité de demande de devis détaillée est disponible après avoir complété 5 commandes finalisées.</p>
                         <div class="progress-info">
                             <p>Votre progression : <span id="currentProgress">0</span>/5 commandes</p>
@@ -92,7 +92,7 @@
                             <h3>Sélection de l'artisan</h3>
                             <div class="form-group">
                                 <label for="artisanSelect" class="form-label">Choisir un artisan</label>
-                                <select id="artisanSelect" class="form-select" required>
+                                <select id="artisanSelect" name="artisanSelect" class="form-select" required>
                                     <option value="">Sélectionnez un artisan</option>
                                     <!-- Artisans will be loaded dynamically -->
                                 </select>
@@ -104,7 +104,7 @@
                             <h3>Détails de l'appel d'offres</h3>
                             <div class="form-group">
                                 <label for="category" class="form-label">Catégorie</label>
-                                <select id="category" class="form-select">
+                                <select id="category" name="category" class="form-select">
                                     <option value="">Sélectionnez une catégorie</option>
                                     <option value="ferronnerie">Ferronnerie</option>
                                     <option value="soudure">Soudure</option>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="location" class="form-label">Localisation du projet</label>
-                                <select id="location" class="form-select">
+                                <select id="location" name="location" class="form-select">
                                     <option value="">Sélectionnez une ville</option>
                                     <option value="lome">Lomé</option>
                                     <option value="sokode">Sokodé</option>
@@ -125,7 +125,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="budget" class="form-label">Budget estimatif (FCFA)</label>
-                                <input type="number" id="budget" class="form-input" placeholder="Ex: 100000">
+                                <input type="number" id="budget" name="budget" class="form-input" placeholder="Ex: 100000">
                             </div>
                         </div>
 
@@ -134,22 +134,22 @@
                             <h3>Description du projet</h3>
                             <div class="form-group">
                                 <label for="title" class="form-label">Titre du projet</label>
-                                <input type="text" id="title" class="form-input" required placeholder="Ex: Portail en fer forgé">
+                                <input type="text" id="title" name="title" class="form-input" required placeholder="Ex: Portail en fer forgé">
                             </div>
 
                             <div class="form-group">
                                 <label for="description" class="form-label">Description détaillée</label>
-                                <textarea id="description" class="form-textarea" required placeholder="Décrivez votre projet en détail : dimensions, matériaux, finition souhaitée, etc."></textarea>
+                                <textarea id="description" name="description" class="form-textarea" required placeholder="Décrivez votre projet en détail : dimensions, matériaux, finition souhaitée, etc."></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="deadline" class="form-label">Date limite souhaitée</label>
-                                <input type="date" id="deadline" class="form-input">
+                                <input type="date" id="deadline" name="deadline" class="form-input">
                             </div>
 
                             <div class="form-group">
                                 <label for="address" class="form-label">Adresse du projet</label>
-                                <input type="text" id="address" class="form-input" required placeholder="Adresse complète">
+                                <input type="text" id="address" name="address" class="form-input" required placeholder="Adresse complète">
                             </div>
 
                             <div class="form-group">
@@ -161,7 +161,7 @@
                             <div class="form-group">
                                 <label for="voiceNote" class="form-label">Message vocal (optionnel)</label>
                                 <div class="voice-recorder">
-                                    <button type="button" id="recordButton" class="btn btn-outline">🎤 Enregistrer</button>
+                                    <button type="button" id="recordButton" class="btn btn-outline"><i class="fas fa-microphone"></i> Enregistrer</button>
                                     <button type="button" id="stopButton" class="btn btn-outline hidden">⏹ Arrêter</button>
                                     <span id="recordingStatus"></span>
                                 </div>
@@ -186,9 +186,80 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <div class="container">
-                <div class="footer-bottom">
+            <!-- Top Footer - CTA Section -->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="footer-top-content">
+                        <h2>Rejoignez la communauté ForgeMarket</h2>
+                        <p>Connectez-vous avec les meilleurs artisans et forgerons du Togo pour vos projets métalliques.</p>
+                    </div>
+                    <div class="footer-top-cta">
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> S'inscrire gratuitement
+                        </a>
+                        <a href="artisans.html" class="btn btn-secondary">
+                            <i class="fas fa-search"></i> Trouver un artisan
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footer - Information Section -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <i class="fas fa-fire"></i> ForgeMarket
+                        </a>
+                        <p>La plateforme de référence pour connecter clients et artisans au Togo. Trouvez des professionnels vérifiés pour tous vos projets métalliques.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="artisans.html">Artisans</a></li>
+                            <li><a href="catalogue.html">Catalogue</a></li>
+                            <li><a href="create-quote.html">Demander un devis</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Informations</h3>
+                        <ul>
+                            <li><a href="about.html">À propos</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="cgu.html">CGU</a></li>
+                            <li><a href="cgv.html">CGV</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Légal</h3>
+                        <ul>
+                            <li><a href="privacy.html">Politique de confidentialité</a></li>
+                            <li><a href="cgu.html">Conditions d'utilisation</a></li>
+                            <li><a href="cgv.html">Conditions de vente</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom-bar">
+                <div class="container">
                     <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="privacy.html">Confidentialité</a>
+                        <a href="cgu.html">CGU</a>
+                        <a href="cgv.html">CGV</a>
+                    </div>
                 </div>
             </div>
         </footer>

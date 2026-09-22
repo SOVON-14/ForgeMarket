@@ -6,6 +6,7 @@
     <title>CGV - ForgeMarket</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div id="app">
@@ -18,10 +19,235 @@
         </nav>
 
         <main class="container" style="padding: 5rem 0;">
-            <h2>Conditions Générales de Vente</h2>
-            <p>Cette page est en attente d’intégration juridique complète.</p>
-            <p>Le site est actuellement une démonstration front-end.</p>
+            <h1>Conditions Générales de Vente</h1>
+            <p class="legal-date">Dernière mise à jour : 15 septembre 2026</p>
+            
+            <section class="legal-section">
+                <h2>1. Objet des Conditions Générales de Vente</h2>
+                <p>Les présentes Conditions Générales de Vente (CGV) régissent les relations contractuelles entre ForgeMarket et les clients effectuant des achats via la plateforme. Elles définissent les conditions de vente des produits et services proposés sur le site.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>2. Produits et Services</h2>
+                <h3>2.1 Produits du catalogue</h3>
+                <p>Les produits proposés dans le catalogue ForgeMarket sont réalisés par des artisans partenaires. Chaque produit est accompagné d'une description détaillée, de photos et du prix TTC.</p>
+
+                <h3>2.2 Services personnalisés</h3>
+                <p>Les services personnalisés (devis sur mesure) font l'objet d'un contrat spécifique entre le client et l'artisan. ForgeMarket agit en tant qu'intermédiaire pour faciliter la mise en relation.</p>
+
+                <h3>2.3 Disponibilité</h3>
+                <p>Les produits sont proposés dans la limite des stocks disponibles. En cas d'indisponibilité, le client sera informé et pourra choisir entre un remboursement ou un délai de fabrication.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>3. Tarifs et Paiement</h2>
+                <h3>3.1 Prix</h3>
+                <p>Les prix affichés sont en FCFA (Francs CFA d'Afrique de l'Ouest) et incluent toutes taxes applicables au Togo. Les frais de livraison sont calculés selon la destination et sont indiqués avant la validation de la commande.</p>
+
+                <h3>3.2 Modalités de paiement</h3>
+                <p>ForgeMarket accepte les modes de paiement suivants :</p>
+                <ul>
+                    <li>Mobile Money (Flooz, TMoney)</li>
+                    <li>Paiement à la livraison (espèces)</li>
+                    <li>Virement bancaire</li>
+                </ul>
+
+                <h3>3.3 Sécurité des paiements</h3>
+                <p>Les transactions sont sécurisées conformément aux normes en vigueur. Les informations bancaires ne sont pas stockées sur nos serveurs.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>4. Commande</h2>
+                <h3>4.1 Processus de commande</h3>
+                <p>Le client valide sa commande après avoir :</p>
+                <ul>
+                    <li>Sélectionné les produits souhaités</li>
+                    <li>Confirmé son adresse de livraison</li>
+                    <li>Choisi le mode de paiement</li>
+                    <li>Accepté les présentes CGV</li>
+                </ul>
+
+                <h3>4.2 Confirmation de commande</h3>
+                <p>La validation de la commande vaut acceptation des CGV. Une confirmation est envoyée par email avec le récapitulatif de la commande.</p>
+
+                <h3>4.3 Commandes multi-artisans</h3>
+                <p>Pour les commandes contenant des produits de plusieurs artisans, la commande est divisée en sous-commandes. Chaque artisan reçoit une notification pour les produits qui le concernent.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>5. Livraison</h2>
+                <h3>5.1 Zones de livraison</h3>
+                <p>ForgeMarket livre principalement dans les grandes villes du Togo (Lomé, Sokodé, Kara, Atakpamé, etc.). Des zones de livraison spécifiques sont indiquées lors de la commande.</p>
+
+                <h3>5.2 Délais de livraison</h3>
+                <p>Les délais de livraison varient selon :</p>
+                <ul>
+                    <li>La disponibilité du produit</li>
+                    <li>Le temps de fabrication pour les produits sur mesure</li>
+                    <li>La zone de livraison</li>
+                </ul>
+                <p>Les délais estimés sont communiqués lors de la commande.</p>
+
+                <h3>5.3 Coûts de livraison</h3>
+                <p>Les frais de livraison sont calculés selon le poids, les dimensions et la destination. Ils sont affichés avant la validation de la commande.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>6. Réception et Vérification</h2>
+                <p>Le client doit vérifier l'état des produits à la réception. En cas de dommage ou de non-conformité, le client doit :</p>
+                <ul>
+                    <li>Refuser la livraison si le produit est endommagé</li>
+                    <li>Contacter le service client dans les 48 heures</li>
+                    <li>Fournir des photos si nécessaire</li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h2>7. Rétractation et Retours</h2>
+                <h3>7.1 Droit de rétractation</h3>
+                <p>Conformément à la législation togolaise, le client dispose d'un délai de 7 jours à compter de la réception pour exercer son droit de rétractation pour les produits standard.</p>
+
+                <h3>7.2 Produits personnalisés</h3>
+                <p>Les produits fabriqués sur mesure ne peuvent être ni retournés ni échangés, sauf en cas de défaut de fabrication ou de non-conformité à la commande.</p>
+
+                <h3>7.3 Conditions de retour</h3>
+                <p>Les produits doivent être retournés dans leur état d'origine, avec tous les accessoires et emballages. Les frais de retour sont à la charge du client, sauf en cas de défaut.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>8. Garanties</h2>
+                <h3>8.1 Garantie légale</h3>
+                <p>Les produits bénéficient de la garantie légale contre les vices cachés conformément à la législation togolaise.</p>
+
+                <h3>8.2 Garantie artisanale</h3>
+                <p>Certains artisans peuvent offrir des garanties supplémentaires spécifiques à leurs produits. Ces garanties sont indiquées dans la description du produit.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>9. Service Client</h2>
+                <p>Le service client ForgeMarket est disponible pour :</p>
+                <ul>
+                    <li>Répondre aux questions sur les produits</li>
+                    <li>Assister en cas de problème de livraison</li>
+                    <li>Gérer les réclamations et retours</li>
+                    <li>Médier en cas de litige avec un artisan</li>
+                </ul>
+                <p><strong>Contact :</strong> contact@forgemarket.tg</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>10. Litiges et Médiation</h2>
+                <p>En cas de litige entre un client et un artisan, ForgeMarket propose une médiation. Si la médiation échoue, le litige peut être soumis aux tribunaux compétents du Togo.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>11. Protection des Données</h2>
+                <p>Les données personnelles collectées lors de la commande sont traitées conformément à notre Politique de Confidentialité.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>12. Propriété Intellectuelle</h2>
+                <p>Tous les éléments du site ForgeMarket (textes, images, logos) sont protégés par le droit d'auteur. Toute reproduction est interdite sans autorisation.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>13. Modification des CGV</h2>
+                <p>ForgeMarket se réserve le droit de modifier les présentes CGV. Les modifications seront notifiées aux clients et prendront effet à compter de leur publication sur le site.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>14. Loi Applicable</h2>
+                <p>Les présentes CGV sont régies par les lois de la République du Togo. Tout litige sera soumis aux tribunaux compétents du Togo.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>15. Contact</h2>
+                <p>Pour toute question concernant les CGV :</p>
+                <p><strong>ForgeMarket</strong><br>
+                Lomé, Togo<br>
+                Email: contact@forgemarket.tg</p>
+            </section>
         </main>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Top Footer - CTA Section -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-top-content">
+                    <h2>Rejoignez la communauté ForgeMarket</h2>
+                    <p>Connectez-vous avec les meilleurs artisans et forgerons du Togo pour vos projets métalliques.</p>
+                </div>
+                <div class="footer-top-cta">
+                    <a href="register.html" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> S'inscrire gratuitement
+                    </a>
+                    <a href="artisans.html" class="btn btn-secondary">
+                        <i class="fas fa-search"></i> Trouver un artisan
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Footer - Information Section -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-fire"></i> ForgeMarket
+                    </a>
+                    <p>La plateforme de référence pour connecter clients et artisans au Togo. Trouvez des professionnels vérifiés pour tous vos projets métalliques.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="artisans.html">Artisans</a></li>
+                        <li><a href="catalogue.html">Catalogue</a></li>
+                        <li><a href="create-quote.html">Demander un devis</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Informations</h3>
+                    <ul>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="cgu.html">CGU</a></li>
+                        <li><a href="cgv.html">CGV</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Légal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Politique de confidentialité</a></li>
+                        <li><a href="cgu.html">Conditions d'utilisation</a></li>
+                        <li><a href="cgv.html">Conditions de vente</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom-bar">
+            <div class="container">
+                <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                <div class="legal-links">
+                    <a href="privacy.html">Confidentialité</a>
+                    <a href="cgu.html">CGU</a>
+                    <a href="cgv.html">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

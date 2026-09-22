@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - ForgeMarket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#C2652A">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <h1>ForgeMarket</h1>
+                    </a>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="catalogue.html">Catalogue</a></li>
+                    <li><a href="create-quote.html">Devis</a></li>
+                    <li><a href="cart.html" class="nav-cart active">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <li class="nav-auth">
+                        <a href="login.html" class="btn btn-outline">Connexion</a>
+                        <a href="register.html" class="btn btn-primary">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <div class="container">
+                <div class="cart-header">
+                    <h1><i class="fas fa-shopping-cart"></i> Mon Panier</h1>
+                    <p>Vos articles sélectionnés</p>
+                </div>
+
+                <div class="cart-layout">
+                    <div class="cart-items" id="cartItems">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i> Chargement...
+                        </div>
+                    </div>
+
+                    <div class="cart-summary" id="cartSummary">
+                        <div class="summary-card">
+                            <h3><i class="fas fa-receipt"></i> Résumé</h3>
+
+                            <div class="summary-row">
+                                <span>Articles</span>
+                                <span id="summaryItems">0</span>
+                            </div>
+
+                            <div class="summary-row">
+                                <span>Sous-total</span>
+                                <span id="summarySubtotal">0 FCFA</span>
+                            </div>
+
+                            <div class="summary-row">
+                                <span>Livraison estimée</span>
+                                <span id="summaryDelivery">0 FCFA</span>
+                            </div>
+
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span id="summaryTotal">0 FCFA</span>
+                            </div>
+
+                            <div class="artisan-info">
+                                <i class="fas fa-users"></i>
+                                <span id="artisanCount">0</span> artisan(s) différents
+                            </div>
+
+                            <button class="btn btn-primary" onclick="proceedToCheckout()">
+                                <i class="fas fa-check"></i> Commander
+                            </button>
+
+                            <button class="btn btn-secondary" onclick="continueShopping()">
+                                <i class="fas fa-shopping-bag"></i> Continuer mes achats
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="empty-cart" id="emptyCart" style="display: none;">
+                    <div class="empty-cart-content">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h2>Votre panier est vide</h2>
+                        <p>Découvrez nos produits dans le catalogue</p>
+                        <button class="btn btn-primary" onclick="window.location.href='catalogue.html'">
+                            <i class="fas fa-shopping-bag"></i> Voir le catalogue
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- Top Footer - CTA Section -->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="footer-top-content">
+                        <h2>Rejoignez la communauté ForgeMarket</h2>
+                        <p>Connectez-vous avec les meilleurs artisans et forgerons du Togo pour vos projets métalliques.</p>
+                    </div>
+                    <div class="footer-top-cta">
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> S'inscrire gratuitement
+                        </a>
+                        <a href="artisans.html" class="btn btn-secondary">
+                            <i class="fas fa-search"></i> Trouver un artisan
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footer - Information Section -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <i class="fas fa-fire"></i> ForgeMarket
+                        </a>
+                        <p>La plateforme de référence pour connecter clients et artisans au Togo. Trouvez des professionnels vérifiés pour tous vos projets métalliques.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="artisans.html">Artisans</a></li>
+                            <li><a href="catalogue.html">Catalogue</a></li>
+                            <li><a href="create-quote.html">Demander un devis</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Informations</h3>
+                        <ul>
+                            <li><a href="about.html">À propos</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="cgu.html">CGU</a></li>
+                            <li><a href="cgv.html">CGV</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Légal</h3>
+                        <ul>
+                            <li><a href="privacy.html">Politique de confidentialité</a></li>
+                            <li><a href="cgu.html">Conditions d'utilisation</a></li>
+                            <li><a href="cgv.html">Conditions de vente</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom-bar">
+                <div class="container">
+                    <p>&copy; 2024 ForgeMarket. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="privacy.html">Confidentialité</a>
+                        <a href="cgu.html">CGU</a>
+                        <a href="cgv.html">CGV</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

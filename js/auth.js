@@ -103,7 +103,7 @@ function initializeLoginForm() {
                 let response;
 
                 try {
-                    response = await fetch('/api/v1/auth/login', {
+                    response = await fetch('/api/v1/auth/login.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -133,7 +133,11 @@ function initializeLoginForm() {
                     showNotification('Connexion réussie !', 'success');
 
                     setTimeout(() => {
-                        const targetPage = result.user && result.user.role === 'admin' ? 'admin-dashboard.html' : 'dashboard.html';
+                        const targetPage = result.user && result.user.role === 'admin'
+                            ? 'admin-dashboard.html'
+                            : result.user && result.user.role === 'artisan'
+                                ? 'artisan-dashboard.html'
+                                : 'dashboard.html';
                         window.location.href = targetPage;
                     }, 500);
                 } else {
@@ -165,7 +169,7 @@ function initializeRegisterForm() {
                 let response;
 
                 try {
-                    response = await fetch('/api/v1/auth/register', {
+                    response = await fetch('/api/v1/auth/register.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
